@@ -8,6 +8,13 @@ namespace DustEngine
     {
         private static GUIStyle iconButtonStyle = null;
 
+        public enum ButtonState
+        {
+            Normal = 0,
+            Pressed = 1,
+            Locked = 2,
+        }
+
         static DustGUI()
         {
             int pad = Config.ICON_BUTTON_PADDING;
@@ -17,51 +24,76 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static bool Button(string caption, bool isPressed = false)
+        public static bool Button(string caption, ButtonState state = ButtonState.Normal)
         {
             var defaultBgColor = GUI.backgroundColor;
 
-            if (isPressed) GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR;
+            switch (state)
+            {
+                default:
+                case ButtonState.Normal: break;
+                case ButtonState.Pressed: GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR; break;
+                case ButtonState.Locked: GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR; break;
+            }
 
             bool res = GUILayout.Button(caption, GUILayout.Height(30));
 
-            if (isPressed) GUI.backgroundColor = defaultBgColor;
+            GUI.backgroundColor = defaultBgColor;
 
-            return res;
+            return state == ButtonState.Locked ? false : res;
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static bool IconButton(string iconName, bool isPressed = false)
+        public static bool IconButton(string iconName, ButtonState state = ButtonState.Normal)
         {
-            return IconButton(iconName, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, isPressed);
+            return IconButton(iconName, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, state);
         }
 
-        public static bool IconButton(string iconName, float width, float height, bool isPressed = false)
+        public static bool IconButton(string iconName, float width, float height, ButtonState state = ButtonState.Normal)
         {
-            return IconButton(Resources.Load(iconName) as Texture, width, height, isPressed);
+            return IconButton(Resources.Load(iconName) as Texture, width, height, null, state);
         }
 
-        public static bool IconButton(Texture texture, bool isPressed = false)
+        public static bool IconButton(string iconName, float width, float height, GUIStyle style, ButtonState state = ButtonState.Normal)
         {
-            return IconButton(texture, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, isPressed);
+            return IconButton(Resources.Load(iconName) as Texture, width, height, style, state);
         }
 
-        public static bool IconButton(Texture texture, float width, float height, bool isPressed = false)
+        public static bool IconButton(Texture texture, ButtonState state = ButtonState.Normal)
         {
+            return IconButton(texture, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, null, state);
+        }
+
+        public static bool IconButton(Texture texture, float width, float height, ButtonState state = ButtonState.Normal)
+        {
+            return IconButton(texture, width, height, null, state);
+        }
+
+        public static bool IconButton(Texture texture, float width, float height, GUIStyle style, ButtonState state = ButtonState.Normal)
+        {
+            if (style == null)
+                style = iconButtonStyle;
+
             var defaultBgColor = GUI.backgroundColor;
 
-            if (isPressed) GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR;
+            switch (state)
+            {
+                default:
+                case ButtonState.Normal: break;
+                case ButtonState.Pressed: GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR; break;
+                case ButtonState.Locked: GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR; break;
+            }
 
-            bool res = GUILayout.Button(texture, iconButtonStyle, new GUILayoutOption[]
+            bool res = GUILayout.Button(texture, style, new GUILayoutOption[]
             {
                 GUILayout.Width(width),
                 GUILayout.Height(height)
             });
 
-            if (isPressed) GUI.backgroundColor = defaultBgColor;
+            GUI.backgroundColor = defaultBgColor;
 
-            return res;
+            return state == ButtonState.Locked ? false : res;
         }
     }
 #endif

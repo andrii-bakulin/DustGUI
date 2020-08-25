@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEditor;
 
 namespace DustEngine
@@ -11,10 +12,51 @@ namespace DustEngine
             EditorGUILayout.LabelField(title, EditorStyles.boldLabel);
         }
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static Color labelNormalColor => GUI.skin.label.normal.textColor;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         public static void Label(string title)
         {
-            EditorGUILayout.LabelField(title);
+            Label(title, 0, 0, labelNormalColor);
         }
+
+        public static void Label(string title, float width, float height)
+        {
+            Label(title, width, height, labelNormalColor);
+        }
+
+        public static void Label(string title, float width, float height, Color color)
+        {
+            var style = new GUIStyle(GUI.skin.label);
+            style.normal.textColor = color;
+
+            GUILayout.Label(title, style, PackOptions(width, height));
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static void PrefixLabel(string title)
+        {
+            PrefixLabel(title, 0, 0, labelNormalColor);
+        }
+
+        public static void PrefixLabel(string title, float width, float height)
+        {
+            PrefixLabel(title, width, height, labelNormalColor);
+        }
+
+        public static void PrefixLabel(string title, float width, float height, Color color)
+        {
+            var style = new GUIStyle(GUI.skin.label);
+            style.normal.textColor = color;
+
+            EditorGUILayout.LabelField(title, style, PackOptions(width, height));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public static void StaticTextField(string label, string message)
         {
@@ -66,7 +108,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static void Space(int width = 1)
+        public static void Space(float width = 1)
         {
             EditorGUILayout.Space(width * EditorGUIUtility.singleLineHeight / 2f);
         }
@@ -101,6 +143,21 @@ namespace DustEngine
         public static bool IsUndoRedoPerformed()
         {
             return Event.current.type == EventType.ValidateCommand && Event.current.commandName == "UndoRedoPerformed";
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static GUILayoutOption[] PackOptions(float width, float height)
+        {
+            var options = new List<GUILayoutOption>();
+
+            if (width > 0f)
+                options.Add(GUILayout.Width(width));
+
+            if (height > 0f)
+                options.Add(GUILayout.Height(height));
+
+            return options.ToArray();
         }
     }
 #endif

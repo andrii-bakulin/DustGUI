@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
 namespace DustEngine
@@ -19,15 +18,7 @@ namespace DustEngine
 
         public static Rect BeginHorizontal(GUIStyle style, float width = 0, float height = 0)
         {
-            var options = new List<GUILayoutOption>();
-
-            if (width > 0)
-                options.Add(GUILayout.Width(width));
-
-            if (height > 0)
-                options.Add(GUILayout.Height(height));
-
-            return EditorGUILayout.BeginHorizontal(style, options.ToArray());
+            return EditorGUILayout.BeginHorizontal(style, PackOptions(width, height));
         }
 
         public static void EndHorizontal()
@@ -49,20 +40,29 @@ namespace DustEngine
 
         public static Rect BeginVertical(GUIStyle style, float width = 0, float height = 0)
         {
-            var options = new List<GUILayoutOption>();
-
-            if (width > 0)
-                options.Add(GUILayout.Width(width));
-
-            if (height > 0)
-                options.Add(GUILayout.Height(height));
-
-            return EditorGUILayout.BeginVertical(style, options.ToArray());
+            return EditorGUILayout.BeginVertical(style, PackOptions(width, height));
         }
 
         public static void EndVertical()
         {
             EditorGUILayout.EndVertical();
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static Vector2 BeginScrollView(Vector2 scrollPosition, float width = 0, float height = 0)
+        {
+            return BeginScrollView(scrollPosition, GUIStyle.none, width, height);
+        }
+
+        public static Vector2 BeginScrollView(Vector2 scrollPosition, GUIStyle style, float width = 0, float height = 0)
+        {
+            return EditorGUILayout.BeginScrollView(scrollPosition, style, PackOptions(width, height));
+        }
+
+        public static void EndScrollView()
+        {
+            EditorGUILayout.EndScrollView();
         }
     }
 #endif
