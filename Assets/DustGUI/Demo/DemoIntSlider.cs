@@ -37,10 +37,9 @@ namespace DustDemo
 
             DustGUI.Space();
 
-            DustGUI.Label("3: [-100 .. [-50 - 50] .. 100]");
+            DustGUI.PrefixLabel("3: [-100 .. [-50 - 50] .. 100]");
             var slider = new DustGUI.IntSlider(-50, 50, -100, 100);
-            slider.stepValueOnClick = 5;
-            slider.stepValueOnDrag = 3;
+            slider.stepValue = 1;
             value3 = slider.Draw(value3);
 
             serializedObject.ApplyModifiedProperties();

@@ -10,8 +10,7 @@ namespace DustEngine
         {
             public float leftValue;
             public float rightValue;
-            public float stepValueOnClick;
-            public float stepValueOnDrag;
+            public float stepValue;
             public float leftLimit;
             public float rightLimit;
 
@@ -53,10 +52,7 @@ namespace DustEngine
             {
                 leftValue = initLeftValue;
                 rightValue = initRightValue;
-
-                stepValueOnClick = (rightValue - leftValue) * 0.10f;
-                stepValueOnDrag = (rightValue - leftValue) * 0.025f;
-
+                stepValue = (rightValue - leftValue) * 0.01f;
                 leftLimit = initLeftLimit;
                 rightLimit = initRightLimit;
             }
@@ -119,8 +115,9 @@ namespace DustEngine
 
                     if (showControlButtons)
                     {
-                        if (IconButton(Config.RESOURCE_ICON_ARROW_LEFT, 16, 16, value <= leftLimit))
-                            deltaChange = -stepValueOnClick;
+                        ButtonState state = value <= leftLimit ? ButtonState.Locked : ButtonState.Normal;
+                        if (IconButton(Config.RESOURCE_ICON_ARROW_LEFT, 16, 16, state))
+                            deltaChange = -stepValue;
                     }
 
                     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -139,8 +136,9 @@ namespace DustEngine
 
                     if (showControlButtons)
                     {
-                        if (IconButton(Config.RESOURCE_ICON_ARROW_RIGHT, 16, 16, value >= rightLimit))
-                            deltaChange = +stepValueOnClick;
+                        ButtonState state = value >= rightLimit ? ButtonState.Locked : ButtonState.Normal;
+                        if (IconButton(Config.RESOURCE_ICON_ARROW_RIGHT, 16, 16, state))
+                            deltaChange = +stepValue;
                     }
 
                     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -178,7 +176,7 @@ namespace DustEngine
                 {
                     if (Event.current.type == EventType.MouseDrag)
                     {
-                        deltaChange = stepValueOnDrag * Event.current.delta.x;
+                        deltaChange = stepValue * Event.current.delta.x;
 
                         if (editor != null)
                             editor.Repaint();
