@@ -50,6 +50,34 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+#if UNITY_2019_1_OR_NEWER
+        public static bool FoldoutBegin(string title, string foldoutId, bool defaultState = true)
+        {
+            string key = "DustEngine.DustGUI.Foldout." + foldoutId;
+
+            bool state = SessionState.GetBool(key, defaultState);
+            state = EditorGUILayout.BeginFoldoutHeaderGroup(state, title);
+            SessionState.SetBool(key, state);
+
+            IndentLevelInc();
+            return state;
+        }
+
+        public static void FoldoutBegin(string title)
+        {
+            EditorGUILayout.BeginFoldoutHeaderGroup(true, title);
+            IndentLevelInc();
+        }
+
+        public static void FoldoutEnd()
+        {
+            IndentLevelDec();
+            EditorGUILayout.EndFoldoutHeaderGroup();
+        }
+#endif
+
+        //--------------------------------------------------------------------------------------------------------------
+
         public static Vector2 BeginScrollView(Vector2 scrollPosition, float width = 0, float height = 0)
         {
             return BeginScrollView(scrollPosition, GUIStyle.none, width, height);

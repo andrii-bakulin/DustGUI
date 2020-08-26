@@ -82,35 +82,16 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static bool FoldoutBegin(string title, string foldoutId, bool defaultState = true)
-        {
-            string key = "DustEngine.DustGUI.Foldout." + foldoutId;
-
-            bool state = SessionState.GetBool(key, defaultState);
-            state = EditorGUILayout.BeginFoldoutHeaderGroup(state, title);
-            SessionState.SetBool(key, state);
-
-            IndentLevelInc();
-            return state;
-        }
-
-        public static void FoldoutBegin(string title)
-        {
-            EditorGUILayout.BeginFoldoutHeaderGroup(true, title);
-            IndentLevelInc();
-        }
-
-        public static void FoldoutEnd()
-        {
-            IndentLevelDec();
-            EditorGUILayout.EndFoldoutHeaderGroup();
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public static void Space(float width = 1)
         {
+#if UNITY_2019_1_OR_NEWER
             EditorGUILayout.Space(width * EditorGUIUtility.singleLineHeight / 2f);
+#else
+            for (int i = 0; i < width; i++)
+            {
+                EditorGUILayout.Space();
+            }
+#endif
         }
 
         public static void Lock()
