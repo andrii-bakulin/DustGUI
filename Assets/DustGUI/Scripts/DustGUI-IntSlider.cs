@@ -16,8 +16,6 @@ namespace DustEngine
 
             public bool isChanged;
 
-            public GUIContent content = new GUIContent();
-
             // Link to parent editor require for force repaint it on changing value by dragging
             // But it's optional to use
             public Editor editor;
@@ -56,18 +54,6 @@ namespace DustEngine
 
             //----------------------------------------------------------------------------------------------------------
 
-            public IntSlider SetTitle(string label, string tooltip = "")
-            {
-                content = new GUIContent(label, tooltip);
-                return this;
-            }
-
-            public IntSlider SetTitle(GUIContent label)
-            {
-                content = label;
-                return this;
-            }
-
             public IntSlider LinkEditor(Editor parentEditor)
             {
                 editor = parentEditor;
@@ -94,16 +80,42 @@ namespace DustEngine
 
             public int Draw(int value)
             {
-                return Draw(value, null);
+                return Draw(null, value, null);
             }
+
+            public int Draw(string label, int value)
+            {
+                return Draw(new GUIContent(label), value, null);
+            }
+
+            public int Draw(GUIContent label, int value)
+            {
+                return Draw(label, value, null);
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             public bool Draw(SerializedProperty propertyValue)
             {
-                Draw(0, propertyValue);
+                Draw(null, 0, propertyValue);
                 return isChanged;
             }
 
-            private int Draw(int value, SerializedProperty propertyValue)
+            public bool Draw(string label, SerializedProperty propertyValue)
+            {
+                Draw(new GUIContent(label), 0, propertyValue);
+                return isChanged;
+            }
+
+            public bool Draw(GUIContent label, SerializedProperty propertyValue)
+            {
+                Draw(label, 0, propertyValue);
+                return isChanged;
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            private int Draw(GUIContent label, int value, SerializedProperty propertyValue)
             {
                 if (propertyValue != null)
                     value = propertyValue.intValue;
@@ -114,9 +126,9 @@ namespace DustEngine
 
                 Rect sliderRect = EditorGUILayout.BeginHorizontal();
                 {
-                    if (content != null)
+                    if (label != null)
                     {
-                        EditorGUILayout.PrefixLabel(content);
+                        EditorGUILayout.PrefixLabel(label);
 
                         Rect labelRect = sliderRect;
                         labelRect.width *= 0.33f; // Cannot find better solution for now

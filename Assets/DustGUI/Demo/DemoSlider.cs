@@ -25,6 +25,8 @@ namespace DustDemo
         private SerializedProperty spValue1;
         private SerializedProperty spValue2;
         private float value3;
+        private float value4;
+        private float value5;
 
         public void OnEnable()
         {
@@ -36,22 +38,28 @@ namespace DustDemo
         {
             tempValue = EditorGUILayout.Slider("Standard Slider [0..5]", tempValue, 0f, 5f);
 
+
             DustGUI.Space();
+
 
             DustGUI.Slider.Create(1f, 2f, 0.01f, 0f, 5f).LinkEditor(this)
-                .SetTitle("1: [0f .. [1f - 2f] .. 5f]")
-                .Draw(spValue1);
+                .Draw("[0f .. [1f - 2f] .. 5f]", spValue1);
 
-            DustGUI.Slider.Create(1f, 10f).LinkEditor(this)
-                .SetTitle("2: [.... [1f - 10f] ....]")
-                .Draw(spValue2);
+            DustGUI.Slider.Create().LinkEditor(this)
+                .SetSlider(1f, 10f)
+                .Draw("[.... [1f - 10f] ....]", spValue2);
+
 
             DustGUI.Space();
 
-            DustGUI.PrefixLabel("3: [-100f .. [-50f - 50f] .. 100f]");
+
+            DustGUI.PrefixLabel("[-100f .. [-50f - 50f] .. 100f]");
+
+            // Use one Slider instance to draw few UI-Elements
             var slider = new DustGUI.Slider(-50f, 50f, 0.5f, -100f, 100f);
-            slider.sliderStep = 5f;
             value3 = slider.Draw(value3);
+            value4 = slider.Draw("Title", value4);
+            value5 = slider.Draw(new GUIContent("Title with tooltip", "Tooltip here"), value5);
 
             serializedObject.ApplyModifiedProperties();
         }
