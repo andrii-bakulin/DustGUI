@@ -8,13 +8,16 @@ DustGUI is library for simplify usage of Unity GUI elements from `GUI`, `GUILayo
 
 DustGUI provides a few new components:
 
-- `Slider` - slider for float variable which supports out-of-range values
-- `IntSlider` - slider for int variable which supports out-of-range values
+  - `DustGUI.Slider` - float-slider supporting out-of-slider-range values
+  - `DustGUI.IntSlider` - int-slider supporting out-of-slider-range values
 
+## DustGUI.Slider & DustGUI.IntSlider
 
-### Slider & IntSlider
+`DustGUI.Slider` & `DustGUI.IntSlider` allow store & control values outside of the slider range. But you still can define min and max limits for values.
 
-Slider & IntSlider allow control values outside of main range. But you still can define min and max limits for values.
+![DustGUI.Slider](https://github.com/andrii-bakulin/DustGUI/blob/master/Wiki/images/DustGUI-Slider-Preview.gif)
+
+How to use:
 
 ```C#
 [CustomEditor(typeof(DemoScript))]
@@ -53,9 +56,7 @@ public class DemoScriptGUI : Editor
 }
 ```
 
-PS: Linking of editor `.LinkEditor(this).` is optional, but values will be updated more friendly when you'll change them by dragging starting with click on the title of the object.
-
-
+PS: Linking of editor `LinkEditor(this)` is optional, but if you link editor then values will be updated more friendly when you'll change them by dragging starting with click on the title of the object.
 
 ## Bug Reporting and Feature Requests
 
