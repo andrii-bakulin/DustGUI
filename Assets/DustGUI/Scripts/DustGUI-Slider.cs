@@ -29,6 +29,11 @@ namespace DustEngine
                 return new Slider();
             }
 
+            public static Slider Create01()
+            {
+                return new Slider(0f, 1f, 0.01f, 0f, 1f);
+            }
+
             public static Slider Create(float sliderMin, float sliderMax, float sliderStep = 0f, float limitMin = float.MinValue, float limitMax = float.MaxValue)
             {
                 return new Slider(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
