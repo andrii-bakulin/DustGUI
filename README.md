@@ -24,6 +24,11 @@ DustGUI provides a few new components:
 How to use:
 
 ```C#
+public class DemoScript : MonoBehaviour
+{
+    public float someFloatVar = 1f;
+}
+
 [CustomEditor(typeof(DemoScript))]
 public class DemoScriptGUI : Editor
 {
@@ -37,7 +42,7 @@ public class DemoScriptGUI : Editor
     
     public void OnEnable()
     {
-        fProperty = serializedObject.FindProperty("SomeFloatVar");
+        fProperty = serializedObject.FindProperty("someFloatVar");
     }
 
     public override void OnInspectorGUI()
