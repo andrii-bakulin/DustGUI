@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 namespace DustEngine
 {
-#if UNITY_EDITOR
     public static partial class DustGUI
     {
         public static bool Field(string label, bool value)
@@ -56,5 +56,5 @@ namespace DustEngine
             EditorGUILayout.PropertyField(property, label, PackOptions(width, height));
         }
     }
-#endif
 }
+#endif

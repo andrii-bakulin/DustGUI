@@ -6,10 +6,17 @@ namespace DustDemo
 {
     public class DemoSlider : MonoBehaviour
     {
-        public float value1 = 1.5f;
-        public float value2 = 5.0f;
+        [SerializeField] private float value1 = 1.5f;
+        [SerializeField] private float value2 = 5.0f;
+
+        private void Update()
+        {
+            Debug.Log("Float Value1 = " + value1.ToString("F3"));
+            Debug.Log("Float Value2 = " + value2.ToString("F3"));
+        }
     }
 
+#if UNITY_EDITOR
     [CustomEditor(typeof(DemoSlider))]
     public class DemoSliderGUI : Editor
     {
@@ -45,4 +52,5 @@ namespace DustDemo
             serializedObject.ApplyModifiedProperties();
         }
     }
+#endif
 }

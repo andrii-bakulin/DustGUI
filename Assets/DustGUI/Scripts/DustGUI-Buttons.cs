@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 namespace DustEngine
 {
-#if UNITY_EDITOR
     public static partial class DustGUI
     {
         private static GUIStyle iconButtonStyle = null;
@@ -96,5 +96,5 @@ namespace DustEngine
             return state == ButtonState.Locked ? false : res;
         }
     }
-#endif
 }
+#endif

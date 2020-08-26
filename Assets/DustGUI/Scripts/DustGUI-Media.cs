@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 namespace DustEngine
 {
-#if UNITY_EDITOR
     public static partial class DustGUI
     {
         public static void Image(Rect rect, Texture texture)
@@ -11,5 +11,5 @@ namespace DustEngine
             EditorGUI.LabelField(rect, new GUIContent(texture));
         }
     }
-#endif
 }
+#endif

@@ -4,9 +4,9 @@ using UnityEditor;
 
 namespace DustEngine
 {
-#if UNITY_EDITOR
     public static partial class DustGUI
     {
+#if UNITY_EDITOR
         public static void Header(string title)
         {
             EditorGUILayout.LabelField(title, EditorStyles.boldLabel);
@@ -159,6 +159,6 @@ namespace DustEngine
 
             return options.ToArray();
         }
-    }
 #endif
+    }
 }

@@ -6,10 +6,17 @@ namespace DustDemo
 {
     public class DemoIntSlider : MonoBehaviour
     {
-        public int value1 = 15;
-        public int value2 = 50;
+        [SerializeField] private int value1 = 15;
+        [SerializeField] private int value2 = 50;
+
+        private void Update()
+        {
+            Debug.Log("Int Value1 = " + value1.ToString());
+            Debug.Log("Int Value2 = " + value2.ToString());
+        }
     }
 
+#if UNITY_EDITOR
     [CustomEditor(typeof(DemoIntSlider))]
     public class DemoIntSliderGUI : Editor
     {
@@ -45,4 +52,5 @@ namespace DustDemo
             serializedObject.ApplyModifiedProperties();
         }
     }
+#endif
 }

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 namespace DustEngine
 {
-#if UNITY_EDITOR
     public static partial class DustGUI
     {
         public static class Config
@@ -20,5 +20,5 @@ namespace DustEngine
             public const string RESOURCE_ICON_ARROW_UP = "DustGUI/Arrow-Up";
         }
     }
-#endif
 }
+#endif

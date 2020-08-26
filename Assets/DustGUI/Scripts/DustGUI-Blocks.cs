@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 namespace DustEngine
 {
-#if UNITY_EDITOR
     public static partial class DustGUI
     {
         public static Rect BeginHorizontal(float width = 0, float height = 0)
@@ -65,5 +65,5 @@ namespace DustEngine
             EditorGUILayout.EndScrollView();
         }
     }
-#endif
 }
+#endif

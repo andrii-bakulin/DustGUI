@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 namespace DustEngine
 {
-#if UNITY_EDITOR
     public static partial class DustGUI
     {
         public class IntSlider
@@ -204,5 +204,5 @@ namespace DustEngine
             }
         }
     }
-#endif
 }
+#endif
