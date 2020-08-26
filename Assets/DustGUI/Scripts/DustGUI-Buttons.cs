@@ -24,9 +24,11 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static bool Button(string caption, ButtonState state = ButtonState.Normal)
+        private static Color m_DefaultBgColor;
+
+        private static void ApplyButtonState(ButtonState state)
         {
-            var defaultBgColor = GUI.backgroundColor;
+            m_DefaultBgColor = GUI.backgroundColor;
 
             switch (state)
             {
@@ -35,10 +37,27 @@ namespace DustEngine
                 case ButtonState.Pressed: GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR; break;
                 case ButtonState.Locked: GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR; break;
             }
+        }
 
-            bool res = GUILayout.Button(caption, GUILayout.Height(30));
+        private static void RollbackButtonState()
+        {
+            GUI.backgroundColor = m_DefaultBgColor;
+        }
 
-            GUI.backgroundColor = defaultBgColor;
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static bool Button(string label, ButtonState state = ButtonState.Normal)
+        {
+            return Button(label, 0, 30, state);
+        }
+
+        public static bool Button(string label, float width, float height, ButtonState state = ButtonState.Normal)
+        {
+            ApplyButtonState(state);
+
+            bool res = GUILayout.Button(label, PackOptions(width, height));
+
+            RollbackButtonState();
 
             return state == ButtonState.Locked ? false : res;
         }
@@ -75,15 +94,7 @@ namespace DustEngine
             if (style == null)
                 style = iconButtonStyle;
 
-            var defaultBgColor = GUI.backgroundColor;
-
-            switch (state)
-            {
-                default:
-                case ButtonState.Normal: break;
-                case ButtonState.Pressed: GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR; break;
-                case ButtonState.Locked: GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR; break;
-            }
+            ApplyButtonState(state);
 
             bool res = GUILayout.Button(texture, style, new GUILayoutOption[]
             {
@@ -91,7 +102,7 @@ namespace DustEngine
                 GUILayout.Height(height)
             });
 
-            GUI.backgroundColor = defaultBgColor;
+            RollbackButtonState();
 
             return state == ButtonState.Locked ? false : res;
         }
