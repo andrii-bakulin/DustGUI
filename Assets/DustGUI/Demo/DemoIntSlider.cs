@@ -38,15 +38,19 @@ namespace DustDemo
 
             DustGUI.Space();
 
-            DustGUI.IntSlider.Create(10, 20, 0, 50).LinkEditor(this).SetTitle("1: [0 .. [10 - 20] .. 50]").Draw(spValue1);
+            DustGUI.IntSlider.Create(10, 20, 1, 0, 50).LinkEditor(this)
+                .SetTitle("1: [0 .. [10 - 20] .. 50]")
+                .Draw(spValue1);
 
-            DustGUI.IntSlider.Create(1, 100).LinkEditor(this).SetTitle("2: [.... [1 - 100] ....]").Draw(spValue2);
+            DustGUI.IntSlider.Create(1, 100).LinkEditor(this)
+                .SetTitle("2: [.... [1 - 100] ....]")
+                .Draw(spValue2);
 
             DustGUI.Space();
 
             DustGUI.PrefixLabel("3: [-100 .. [-50 - 50] .. 100]");
-            var slider = new DustGUI.IntSlider(-50, 50, -100, 100);
-            slider.stepValue = 1;
+            var slider = new DustGUI.IntSlider(-50, 50, 5, -100, 100);
+            slider.sliderStep = 1;
             value3 = slider.Draw(value3);
 
             serializedObject.ApplyModifiedProperties();

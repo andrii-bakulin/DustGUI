@@ -8,18 +8,18 @@ namespace DustEngine
     {
         public class IntSlider
         {
-            public int leftValue;
-            public int rightValue;
-            public int stepValue;
-            public int leftLimit;
-            public int rightLimit;
+            public int sliderMin;
+            public int sliderMax;
+            public int sliderStep;
+            public int limitMin;
+            public int limitMax;
 
             public bool isChanged;
 
             public GUIContent content = new GUIContent();
 
             // Link to parent editor require for force repaint it on changing value by dragging
-            // But it's optional
+            // But it's optional to use
             public Editor editor;
 
             public bool showControlButtons = true;
@@ -31,32 +31,27 @@ namespace DustEngine
                 return new IntSlider();
             }
 
-            public static IntSlider Create(int leftValue, int rightValue, int leftLimit = int.MinValue, int rightLimit = int.MaxValue)
+            public static IntSlider Create(int sliderMin, int sliderMax, int sliderStep = 0, int limitMin = int.MinValue, int limitMax = int.MaxValue)
             {
-                return new IntSlider(leftValue, rightValue, leftLimit, rightLimit);
+                return new IntSlider(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             public IntSlider()
             {
-                Init(0, 100, int.MinValue, int.MaxValue);
+                Init(0, 100, 0, int.MinValue, int.MaxValue);
             }
 
-            public IntSlider(int leftValue, int rightValue, int leftLimit = int.MinValue, int rightLimit = int.MaxValue)
+            public IntSlider(int sliderMin, int sliderMax, int sliderStep = 0, int limitMin = int.MinValue, int limitMax = int.MaxValue)
             {
-                Init(leftValue, rightValue, leftLimit, rightLimit);
+                Init(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
             }
 
-            public void Init(int initLeftValue, int initRightValue, int initLeftLimit, int initRightLimit)
+            public void Init(int setSliderMin, int setSliderMax, int setSliderStep, int setLimitMin, int setLimitMax)
             {
-                leftValue = initLeftValue;
-                rightValue = initRightValue;
-
-                stepValue = Mathf.CeilToInt((initRightValue - initLeftValue) * 0.01f);
-
-                leftLimit = initLeftLimit;
-                rightLimit = initRightLimit;
+                SetSlider(setSliderMin, setSliderMax, setSliderStep);
+                SetLimits(setLimitMin, setLimitMax);
             }
 
             //----------------------------------------------------------------------------------------------------------
@@ -76,6 +71,22 @@ namespace DustEngine
             public IntSlider LinkEditor(Editor parentEditor)
             {
                 editor = parentEditor;
+                return this;
+            }
+
+            public IntSlider SetSlider(int setSliderMin, int setSliderMax, int setSliderStep = 0)
+            {
+                sliderMin = Mathf.Min(setSliderMin, setSliderMax);
+                sliderMax = Mathf.Max(setSliderMin, setSliderMax);
+
+                sliderStep = setSliderStep > 0 ? setSliderStep : Mathf.CeilToInt((sliderMax - sliderMin) * 0.01f);
+                return this;
+            }
+
+            public IntSlider SetLimits(int setLimitMin, int setLimitMax)
+            {
+                limitMin = Mathf.Min(setLimitMin, setLimitMax);
+                limitMax = Mathf.Max(setLimitMin, setLimitMax);
                 return this;
             }
 
@@ -117,16 +128,16 @@ namespace DustEngine
 
                     if (showControlButtons)
                     {
-                        ButtonState state = value <= leftLimit ? ButtonState.Locked : ButtonState.Normal;
+                        ButtonState state = value <= limitMin ? ButtonState.Locked : ButtonState.Normal;
                         if (IconButton(Config.RESOURCE_ICON_ARROW_LEFT, 16, 16, state))
-                            deltaChange = -stepValue;
+                            deltaChange = -sliderStep;
                     }
 
                     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                     // Slider
 
-                    oldValue = Mathf.Clamp(value, leftValue, rightValue);
-                    newValue = (int) GUILayout.HorizontalSlider(oldValue, leftValue, rightValue);
+                    oldValue = Mathf.Clamp(value, sliderMin, sliderMax);
+                    newValue = (int) GUILayout.HorizontalSlider(oldValue, sliderMin, sliderMax);
 
                     if (!oldValue.Equals(newValue))
                     {
@@ -138,9 +149,9 @@ namespace DustEngine
 
                     if (showControlButtons)
                     {
-                        ButtonState state = value >= rightLimit ? ButtonState.Locked : ButtonState.Normal;
+                        ButtonState state = value >= limitMax ? ButtonState.Locked : ButtonState.Normal;
                         if (IconButton(Config.RESOURCE_ICON_ARROW_RIGHT, 16, 16, state))
-                            deltaChange = +stepValue;
+                            deltaChange = +sliderStep;
                     }
 
                     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -153,7 +164,7 @@ namespace DustEngine
 
                         oldValue = propertyValue.intValue;
                         EditorGUILayout.PropertyField(propertyValue, GUIContent.none, GUILayout.Width(EditorGUIUtility.fieldWidth));
-                        newValue = Mathf.Clamp(propertyValue.intValue, leftLimit, rightLimit);
+                        newValue = Mathf.Clamp(propertyValue.intValue, limitMin, limitMax);
 
                         EditorGUI.indentLevel = indentLevel;
                     }
@@ -161,7 +172,7 @@ namespace DustEngine
                     {
                         oldValue = value;
                         newValue = EditorGUILayout.IntField(value, GUILayout.Width(EditorGUIUtility.fieldWidth));
-                        newValue = Mathf.Clamp(newValue, leftLimit, rightLimit);
+                        newValue = Mathf.Clamp(newValue, limitMin, limitMax);
                     }
 
                     if (!oldValue.Equals(newValue))
@@ -178,7 +189,7 @@ namespace DustEngine
                 {
                     if (Event.current.type == EventType.MouseDrag)
                     {
-                        deltaChange = Mathf.RoundToInt(stepValue * Event.current.delta.x);
+                        deltaChange = Mathf.RoundToInt(sliderStep * Event.current.delta.x);
 
                         if (editor != null)
                             editor.Repaint();
@@ -188,7 +199,7 @@ namespace DustEngine
                 if (!Mathf.Approximately(deltaChange, 0f))
                 {
                     oldValue = value;
-                    newValue = Mathf.Clamp(oldValue + deltaChange, leftLimit, rightLimit);
+                    newValue = Mathf.Clamp(oldValue + deltaChange, limitMin, limitMax);
 
                     if (!oldValue.Equals(newValue))
                     {
