@@ -8,6 +8,15 @@ namespace DustEngine
     {
         public class IntSliderExt
         {
+            public class UIConfig
+            {
+                public bool showLabel = true;
+                public bool showButtons = true;
+                public bool showValue = true;
+            }
+
+            public UIConfig ui = new UIConfig();
+
             public int sliderMin;
             public int sliderMax;
             public int sliderStep;
@@ -19,8 +28,6 @@ namespace DustEngine
             // Link to parent editor require for force repaint it on changing value by dragging
             // But it's optional to use
             public Editor editor;
-
-            public bool showControlButtons = true;
 
             //----------------------------------------------------------------------------------------------------------
 
@@ -131,7 +138,7 @@ namespace DustEngine
 
                 Rect sliderRect = EditorGUILayout.BeginHorizontal();
                 {
-                    if (label != null)
+                    if (ui.showLabel && label != null)
                     {
                         EditorGUILayout.PrefixLabel(label);
 
@@ -141,9 +148,7 @@ namespace DustEngine
                         EditorGUIUtility.AddCursorRect(labelRect, MouseCursor.SlideArrow);
                     }
 
-                    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-                    if (showControlButtons)
+                    if (ui.showButtons)
                     {
                         ButtonState state = value <= limitMin ? ButtonState.Locked : ButtonState.Normal;
                         if (IconButton(Config.RESOURCE_ICON_ARROW_LEFT, 16, 16, state))
@@ -164,41 +169,39 @@ namespace DustEngine
 
                     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                    if (showControlButtons)
+                    if (ui.showButtons)
                     {
                         ButtonState state = value >= limitMax ? ButtonState.Locked : ButtonState.Normal;
                         if (IconButton(Config.RESOURCE_ICON_ARROW_RIGHT, 16, 16, state))
                             deltaChange = +sliderStep;
                     }
 
-                    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                    // Text
-
-                    if (propertyValue != null)
+                    if (ui.showValue)
                     {
-                        int indentLevel = EditorGUI.indentLevel;
-                        EditorGUI.indentLevel = 0; // Because it'll try to add left-spacing when draw text-field
+                        if (propertyValue != null)
+                        {
+                            int indentLevel = EditorGUI.indentLevel;
+                            EditorGUI.indentLevel = 0; // Because it'll try to add left-spacing when draw text-field
 
-                        oldValue = propertyValue.intValue;
-                        EditorGUILayout.PropertyField(propertyValue, GUIContent.none, GUILayout.Width(EditorGUIUtility.fieldWidth));
-                        newValue = Mathf.Clamp(propertyValue.intValue, limitMin, limitMax);
+                            oldValue = propertyValue.intValue;
+                            EditorGUILayout.PropertyField(propertyValue, GUIContent.none, GUILayout.Width(EditorGUIUtility.fieldWidth));
+                            newValue = Mathf.Clamp(propertyValue.intValue, limitMin, limitMax);
 
-                        EditorGUI.indentLevel = indentLevel;
+                            EditorGUI.indentLevel = indentLevel;
+                        }
+                        else
+                        {
+                            oldValue = value;
+                            newValue = EditorGUILayout.IntField(value, GUILayout.Width(EditorGUIUtility.fieldWidth));
+                            newValue = Mathf.Clamp(newValue, limitMin, limitMax);
+                        }
+
+                        if (!oldValue.Equals(newValue))
+                        {
+                            value = newValue;
+                            isChanged = true;
+                        }
                     }
-                    else
-                    {
-                        oldValue = value;
-                        newValue = EditorGUILayout.IntField(value, GUILayout.Width(EditorGUIUtility.fieldWidth));
-                        newValue = Mathf.Clamp(newValue, limitMin, limitMax);
-                    }
-
-                    if (!oldValue.Equals(newValue))
-                    {
-                        value = newValue;
-                        isChanged = true;
-                    }
-
-                    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 }
                 EditorGUILayout.EndHorizontal();
 
