@@ -53,7 +53,7 @@ namespace DustDemo
             DustGUI.Space();
 
 
-            DustGUI.PrefixLabel("[-100 .. [-50 - 50] .. 100]");
+            DustGUI.Label("[-100 .. [-50 - 50] .. 100]");
 
             // Use one Slider instance to draw few UI-Elements
             var slider = new DustGUI.IntSliderExt(-50, 50, 5, -100, 100);

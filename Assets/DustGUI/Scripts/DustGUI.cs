@@ -38,31 +38,11 @@ namespace DustEngine
             var style = new GUIStyle(GUI.skin.label);
             style.normal.textColor = color;
 
-            GUILayout.Label(title, style, PackOptions(width, height));
+            Label(title, width, height, style);
         }
 
         public static void Label(string title, float width, float height, GUIStyle style)
         {
-            GUILayout.Label(title, style, PackOptions(width, height));
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        public static void PrefixLabel(string title)
-        {
-            PrefixLabel(title, 0, 0, labelNormalColor);
-        }
-
-        public static void PrefixLabel(string title, float width, float height)
-        {
-            PrefixLabel(title, width, height, labelNormalColor);
-        }
-
-        public static void PrefixLabel(string title, float width, float height, Color color)
-        {
-            var style = new GUIStyle(GUI.skin.label);
-            style.normal.textColor = color;
-
             EditorGUILayout.LabelField(title, style, PackOptions(width, height));
         }
 
@@ -114,14 +94,29 @@ namespace DustEngine
             GUI.enabled = true;
         }
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static int indentLevel
+        {
+            get => EditorGUI.indentLevel;
+            set => EditorGUI.indentLevel = value;
+        }
+
         public static void IndentLevelInc()
         {
-            EditorGUI.indentLevel++;
+            indentLevel++;
         }
 
         public static void IndentLevelDec()
         {
-            EditorGUI.indentLevel--;
+            indentLevel--;
+        }
+
+        public static int IndentLevelReset(int newValue = 0)
+        {
+            int prevValue = indentLevel;
+            indentLevel = newValue;
+            return prevValue;
         }
 
         //--------------------------------------------------------------------------------------------------------------

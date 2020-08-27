@@ -180,14 +180,14 @@ namespace DustEngine
                     {
                         if (propertyValue != null)
                         {
-                            int indentLevel = EditorGUI.indentLevel;
-                            EditorGUI.indentLevel = 0; // Because it'll try to add left-spacing when draw text-field
+                            // Because it'll try to add left-spacing when draw text-field
+                            int indentLevel = IndentLevelReset();
 
                             oldValue = propertyValue.intValue;
                             EditorGUILayout.PropertyField(propertyValue, GUIContent.none, GUILayout.Width(EditorGUIUtility.fieldWidth));
                             newValue = Mathf.Clamp(propertyValue.intValue, limitMin, limitMax);
 
-                            EditorGUI.indentLevel = indentLevel;
+                            IndentLevelReset(indentLevel);
                         }
                         else
                         {
