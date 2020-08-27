@@ -12,14 +12,14 @@ DustGUI is library for simplify usage of Unity GUI elements from `GUI`, `GUILayo
 
 DustGUI provides a few new components:
 
-- `DustGUI.Slider` - float-slider supporting out-of-slider-range values
-- `DustGUI.IntSlider` - int-slider supporting out-of-slider-range values
+- `DustGUI.SliderExt` - extended float-slider supporting out-of-slider-range values
+- `DustGUI.IntSliderExt` - extended int-slider supporting out-of-slider-range values
 
-## DustGUI.Slider & DustGUI.IntSlider
+## DustGUI.SliderExt & DustGUI.IntSliderExt
 
-`DustGUI.Slider` & `DustGUI.IntSlider` allow store & control values outside of the slider range. But you still can define min and max limits for values.
+`DustGUI.SliderExt` & `DustGUI.IntSliderExt` allow store & control values outside of the slider range. But you still can define min and max limits for values.
 
-![DustGUI.Slider](https://github.com/andrii-bakulin/DustGUI/blob/master/Wiki/images/DustGUI-Slider-Preview.gif)
+![DustGUI.SliderExt](https://github.com/andrii-bakulin/DustGUI/blob/master/Wiki/images/DustGUI-SliderExt-Preview.gif)
 
 How to use:
 
@@ -49,10 +49,10 @@ public class DemoScriptGUI : Editor
     {
         // Creates slider with slider range between [0f .. 25f] with click-step 0.5f 
         // and global limits for value in [-100f .. +100f]
-        fValue = DustGUI.Slider.Create(0f, 25f, 0.5f, -100f, 100f).LinkEditor(this).Draw("Var Label", fValue);
+        fValue = DustGUI.SliderExt.Create(0f, 25f, 0.5f, -100f, 100f).LinkEditor(this).Draw("Var Label", fValue);
         
         // You can create one instance of class and use it to draw few same sliders
-        var slider = new DustGUI.IntSlider(0, 100, 2).LinkEditor(this);
+        var slider = new DustGUI.IntSliderExt(0, 100, 2).LinkEditor(this);
         slider.SetLimits(-1000, +1000);
         iValue0 = slider.Draw(iValue0); // full width slider
         iValue1 = slider.Draw("Int #1", iValue1); 
@@ -60,7 +60,7 @@ public class DemoScriptGUI : Editor
         
         // Also, you can use SerializedProperty object
         // Creeate01 will set slider range between [0f..1f] with step 0.01f and limits [0f..1f]
-        DustGUI.Slider.Create01().LinkEditor(this).Draw("Range 0..1", fProperty);
+        DustGUI.SliderExt.Create01().LinkEditor(this).Draw("Range 0..1", fProperty);
     }
 }
 ```

@@ -42,10 +42,10 @@ namespace DustDemo
             DustGUI.Space();
 
 
-            DustGUI.Slider.Create(1f, 2f, 0.01f, 0f, 5f).LinkEditor(this)
+            DustGUI.SliderExt.Create(1f, 2f, 0.01f, 0f, 5f).LinkEditor(this)
                 .Draw("[0f .. [1f - 2f] .. 5f]", spValue1);
 
-            DustGUI.Slider.Create().LinkEditor(this)
+            DustGUI.SliderExt.Create().LinkEditor(this)
                 .SetSlider(1f, 10f)
                 .Draw("[.... [1f - 10f] ....]", spValue2);
 
@@ -56,7 +56,7 @@ namespace DustDemo
             DustGUI.PrefixLabel("[-100f .. [-50f - 50f] .. 100f]");
 
             // Use one Slider instance to draw few UI-Elements
-            var slider = new DustGUI.Slider(-50f, 50f, 0.5f, -100f, 100f);
+            var slider = new DustGUI.SliderExt(-50f, 50f, 0.5f, -100f, 100f);
             value3 = slider.Draw(value3);
             value4 = slider.Draw("Title", value4);
             value5 = slider.Draw(new GUIContent("Title with tooltip", "Tooltip here"), value5);

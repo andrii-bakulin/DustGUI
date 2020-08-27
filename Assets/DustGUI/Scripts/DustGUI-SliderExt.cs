@@ -6,13 +6,13 @@ namespace DustEngine
 {
     public static partial class DustGUI
     {
-        public class IntSlider
+        public class SliderExt
         {
-            public int sliderMin;
-            public int sliderMax;
-            public int sliderStep;
-            public int limitMin;
-            public int limitMax;
+            public float sliderMin;
+            public float sliderMax;
+            public float sliderStep;
+            public float limitMin;
+            public float limitMax;
 
             public bool isChanged;
 
@@ -24,34 +24,34 @@ namespace DustEngine
 
             //----------------------------------------------------------------------------------------------------------
 
-            public static IntSlider Create()
+            public static SliderExt Create()
             {
-                return new IntSlider();
+                return new SliderExt();
             }
 
-            public static Slider Create100()
+            public static SliderExt Create01()
             {
-                return new Slider(0, 100, 1, 0, 100);
+                return new SliderExt(0f, 1f, 0.01f, 0f, 1f);
             }
 
-            public static IntSlider Create(int sliderMin, int sliderMax, int sliderStep = 0, int limitMin = int.MinValue, int limitMax = int.MaxValue)
+            public static SliderExt Create(float sliderMin, float sliderMax, float sliderStep = 0f, float limitMin = float.MinValue, float limitMax = float.MaxValue)
             {
-                return new IntSlider(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
+                return new SliderExt(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            public IntSlider()
+            public SliderExt()
             {
-                Init(0, 100, 0, int.MinValue, int.MaxValue);
+                Init(0f, 1f, 0f, float.MinValue, float.MaxValue);
             }
 
-            public IntSlider(int sliderMin, int sliderMax, int sliderStep = 0, int limitMin = int.MinValue, int limitMax = int.MaxValue)
+            public SliderExt(float sliderMin, float sliderMax, float sliderStep = 0f, float limitMin = float.MinValue, float limitMax = float.MaxValue)
             {
                 Init(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
             }
 
-            public void Init(int setSliderMin, int setSliderMax, int setSliderStep, int setLimitMin, int setLimitMax)
+            public void Init(float setSliderMin, float setSliderMax, float setSliderStep, float setLimitMin, float setLimitMax)
             {
                 SetSlider(setSliderMin, setSliderMax, setSliderStep);
                 SetLimits(setLimitMin, setLimitMax);
@@ -59,22 +59,22 @@ namespace DustEngine
 
             //----------------------------------------------------------------------------------------------------------
 
-            public IntSlider LinkEditor(Editor parentEditor)
+            public SliderExt LinkEditor(Editor parentEditor)
             {
                 editor = parentEditor;
                 return this;
             }
 
-            public IntSlider SetSlider(int setSliderMin, int setSliderMax, int setSliderStep = 0)
+            public SliderExt SetSlider(float setSliderMin, float setSliderMax, float setSliderStep = 0f)
             {
                 sliderMin = Mathf.Min(setSliderMin, setSliderMax);
                 sliderMax = Mathf.Max(setSliderMin, setSliderMax);
 
-                sliderStep = setSliderStep > 0 ? setSliderStep : Mathf.CeilToInt((sliderMax - sliderMin) * 0.01f);
+                sliderStep = setSliderStep > 0f ? setSliderStep : (sliderMax - sliderMin) * 0.01f;
                 return this;
             }
 
-            public IntSlider SetLimits(int setLimitMin, int setLimitMax)
+            public SliderExt SetLimits(float setLimitMin, float setLimitMax)
             {
                 limitMin = Mathf.Min(setLimitMin, setLimitMax);
                 limitMax = Mathf.Max(setLimitMin, setLimitMax);
@@ -83,17 +83,17 @@ namespace DustEngine
 
             //----------------------------------------------------------------------------------------------------------
 
-            public int Draw(int value)
+            public float Draw(float value)
             {
                 return Draw(null, value, null);
             }
 
-            public int Draw(string label, int value)
+            public float Draw(string label, float value)
             {
                 return Draw(new GUIContent(label), value, null);
             }
 
-            public int Draw(GUIContent label, int value)
+            public float Draw(GUIContent label, float value)
             {
                 return Draw(label, value, null);
             }
@@ -102,32 +102,32 @@ namespace DustEngine
 
             public bool Draw(SerializedProperty propertyValue)
             {
-                Draw(null, 0, propertyValue);
+                Draw(null, 0f, propertyValue);
                 return isChanged;
             }
 
             public bool Draw(string label, SerializedProperty propertyValue)
             {
-                Draw(new GUIContent(label), 0, propertyValue);
+                Draw(new GUIContent(label), 0f, propertyValue);
                 return isChanged;
             }
 
             public bool Draw(GUIContent label, SerializedProperty propertyValue)
             {
-                Draw(label, 0, propertyValue);
+                Draw(label, 0f, propertyValue);
                 return isChanged;
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            private int Draw(GUIContent label, int value, SerializedProperty propertyValue)
+            private float Draw(GUIContent label, float value, SerializedProperty propertyValue)
             {
                 if (propertyValue != null)
-                    value = propertyValue.intValue;
+                    value = propertyValue.floatValue;
 
-                int deltaChange = 0;
-                int oldValue;
-                int newValue;
+                float deltaChange = 0f;
+                float oldValue;
+                float newValue;
 
                 Rect sliderRect = EditorGUILayout.BeginHorizontal();
                 {
@@ -154,11 +154,11 @@ namespace DustEngine
                     // Slider
 
                     oldValue = Mathf.Clamp(value, sliderMin, sliderMax);
-                    newValue = (int) GUILayout.HorizontalSlider(oldValue, sliderMin, sliderMax);
+                    newValue = GUILayout.HorizontalSlider(oldValue, sliderMin, sliderMax);
 
                     if (!oldValue.Equals(newValue))
                     {
-                        value = newValue;
+                        value = (float) System.Math.Round(newValue, 2);
                         isChanged = true;
                     }
 
@@ -179,16 +179,16 @@ namespace DustEngine
                         int indentLevel = EditorGUI.indentLevel;
                         EditorGUI.indentLevel = 0; // Because it'll try to add left-spacing when draw text-field
 
-                        oldValue = propertyValue.intValue;
+                        oldValue = propertyValue.floatValue;
                         EditorGUILayout.PropertyField(propertyValue, GUIContent.none, GUILayout.Width(EditorGUIUtility.fieldWidth));
-                        newValue = Mathf.Clamp(propertyValue.intValue, limitMin, limitMax);
+                        newValue = Mathf.Clamp(propertyValue.floatValue, limitMin, limitMax);
 
                         EditorGUI.indentLevel = indentLevel;
                     }
                     else
                     {
                         oldValue = value;
-                        newValue = EditorGUILayout.IntField(value, GUILayout.Width(EditorGUIUtility.fieldWidth));
+                        newValue = EditorGUILayout.FloatField(value, GUILayout.Width(EditorGUIUtility.fieldWidth));
                         newValue = Mathf.Clamp(newValue, limitMin, limitMax);
                     }
 
@@ -206,7 +206,7 @@ namespace DustEngine
                 {
                     if (Event.current.type == EventType.MouseDrag)
                     {
-                        deltaChange = Mathf.RoundToInt(sliderStep * Event.current.delta.x);
+                        deltaChange = sliderStep * Event.current.delta.x;
 
                         if (editor != null)
                             editor.Repaint();
@@ -216,7 +216,9 @@ namespace DustEngine
                 if (!Mathf.Approximately(deltaChange, 0f))
                 {
                     oldValue = value;
+
                     newValue = Mathf.Clamp(oldValue + deltaChange, limitMin, limitMax);
+                    newValue = (float) System.Math.Round(newValue, 2);
 
                     if (!oldValue.Equals(newValue))
                     {
@@ -226,7 +228,7 @@ namespace DustEngine
                 }
 
                 if (propertyValue != null)
-                    propertyValue.intValue = value;
+                    propertyValue.floatValue = value;
 
                 return value;
             }
