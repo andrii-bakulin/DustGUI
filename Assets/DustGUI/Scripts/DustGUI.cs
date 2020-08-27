@@ -23,6 +23,11 @@ namespace DustEngine
             Label(title, 0, 0, labelNormalColor);
         }
 
+        public static void Label(string title, GUIStyle style)
+        {
+            Label(title, 0, 0, style);
+        }
+
         public static void Label(string title, float width, float height)
         {
             Label(title, width, height, labelNormalColor);
@@ -33,6 +38,11 @@ namespace DustEngine
             var style = new GUIStyle(GUI.skin.label);
             style.normal.textColor = color;
 
+            GUILayout.Label(title, style, PackOptions(width, height));
+        }
+
+        public static void Label(string title, float width, float height, GUIStyle style)
+        {
             GUILayout.Label(title, style, PackOptions(width, height));
         }
 
