@@ -72,16 +72,30 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static void Space(float width = 1)
+        public static void Space(float width = 6f)
         {
 #if UNITY_2019_1_OR_NEWER
-            EditorGUILayout.Space(width * EditorGUIUtility.singleLineHeight / 2f);
+            EditorGUILayout.Space(width);
+#else
+            EditorGUILayout.Space();
+#endif
+        }
+
+        public static void SpaceLine(float width = 1f)
+        {
+#if UNITY_2019_1_OR_NEWER
+            EditorGUILayout.Space(width * EditorGUIUtility.singleLineHeight);
 #else
             for (int i = 0; i < width; i++)
             {
                 EditorGUILayout.Space();
             }
 #endif
+        }
+
+        public static void SpaceExpand(float width = 6f)
+        {
+            EditorGUILayout.Space(width, true);
         }
 
         public static void Lock()

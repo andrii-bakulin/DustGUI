@@ -39,7 +39,7 @@ namespace DustDemo
             tempValue = EditorGUILayout.IntSlider("Standard Slider [0..10]", tempValue, 0, 10);
 
 
-            DustGUI.Space();
+            DustGUI.SpaceLine();
 
 
             DustGUI.IntSliderExt.Create(10, 20, 1, 0, 50).LinkEditor(this)
@@ -50,7 +50,7 @@ namespace DustDemo
                 .Draw("[.... [1 - 100] ....]", spValue2);
 
 
-            DustGUI.Space();
+            DustGUI.SpaceLine();
 
 
             DustGUI.Label("[-100 .. [-50 - 50] .. 100]");
