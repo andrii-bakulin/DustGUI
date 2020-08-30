@@ -50,9 +50,9 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_2019_1_OR_NEWER
         public static bool FoldoutBegin(string title, string foldoutId, bool defaultState = true)
         {
+#if UNITY_2019_1_OR_NEWER
             string key = "DustEngine.DustGUI.Foldout." + foldoutId;
 
             bool state = SessionState.GetBool(key, defaultState);
@@ -61,20 +61,33 @@ namespace DustEngine
 
             IndentLevelInc();
             return state;
+#else
+            return FoldoutBegin(title);
+#endif
         }
 
-        public static void FoldoutBegin(string title)
+        public static bool FoldoutBegin(string title)
         {
+#if UNITY_2019_1_OR_NEWER
             EditorGUILayout.BeginFoldoutHeaderGroup(true, title);
+#else
+            Header(title);
+#endif
+
             IndentLevelInc();
+            return true;
         }
 
         public static void FoldoutEnd()
         {
             IndentLevelDec();
+
+#if UNITY_2019_1_OR_NEWER
             EditorGUILayout.EndFoldoutHeaderGroup();
-        }
+#else
+            SpaceLine();
 #endif
+        }
 
         //--------------------------------------------------------------------------------------------------------------
 
