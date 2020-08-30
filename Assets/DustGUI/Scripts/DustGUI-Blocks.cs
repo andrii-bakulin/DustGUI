@@ -88,6 +88,22 @@ namespace DustEngine
             return EditorGUILayout.BeginScrollView(scrollPosition, style, PackOptions(width, height));
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static bool BeginScrollView(ref Vector2 scrollPosition, float width = 0, float height = 0)
+        {
+            return BeginScrollView(ref scrollPosition, GUIStyle.none, width, height);
+        }
+
+        public static bool BeginScrollView(ref Vector2 scrollPosition, GUIStyle style, float width = 0, float height = 0)
+        {
+            var lastPosition = scrollPosition;
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, style, PackOptions(width, height));
+            return !lastPosition.Equals(scrollPosition);
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         public static void EndScrollView()
         {
             EditorGUILayout.EndScrollView();
