@@ -7,9 +7,9 @@ namespace DustEngine
     public static partial class DustGUI
     {
 #if UNITY_EDITOR
-        public static void Header(string title)
+        public static void Header(string title, float width = 0, float height = 0)
         {
-            EditorGUILayout.LabelField(title, EditorStyles.boldLabel);
+            EditorGUILayout.LabelField(title, EditorStyles.boldLabel, PackOptions(width, height));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -18,17 +18,12 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static void Label(string title)
-        {
-            Label(title, 0, 0, labelNormalColor);
-        }
-
         public static void Label(string title, GUIStyle style)
         {
             Label(title, 0, 0, style);
         }
 
-        public static void Label(string title, float width, float height)
+        public static void Label(string title, float width = 0f, float height = 0f)
         {
             Label(title, width, height, labelNormalColor);
         }
@@ -44,6 +39,35 @@ namespace DustEngine
         public static void Label(string title, float width, float height, GUIStyle style)
         {
             EditorGUILayout.LabelField(title, style, PackOptions(width, height));
+        }
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static void SimpleLabel(string title)
+        {
+            SimpleLabel(title, 0, 0, labelNormalColor);
+        }
+
+        public static void SimpleLabel(string title, GUIStyle style)
+        {
+            SimpleLabel(title, 0, 0, style);
+        }
+
+        public static void SimpleLabel(string title, float width, float height)
+        {
+            SimpleLabel(title, width, height, labelNormalColor);
+        }
+
+        public static void SimpleLabel(string title, float width, float height, Color color)
+        {
+            var style = new GUIStyle(GUI.skin.label);
+            style.normal.textColor = color;
+
+            SimpleLabel(title, width, height, style);
+        }
+
+        public static void SimpleLabel(string title, float width, float height, GUIStyle style)
+        {
+            GUILayout.Label(title, style, PackOptions(width, height));
         }
 
         //--------------------------------------------------------------------------------------------------------------
