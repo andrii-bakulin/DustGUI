@@ -22,6 +22,11 @@ namespace DustEngine
             iconButtonStyle.padding = new RectOffset(pad, pad, pad, pad);
         }
 
+        public static GUIStyle GetIconButtonStyle()
+        {
+            return new GUIStyle(iconButtonStyle);
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         private static Color m_DefaultBgColor;
@@ -64,39 +69,79 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static bool IconButton(string iconName, ButtonState state = ButtonState.Normal)
+        public static bool IconButton(string iconName, ButtonState state)
         {
-            return IconButton(iconName, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, state);
+            return IconButton(Resources.Load(iconName) as Texture, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, null, state);
         }
 
-        public static bool IconButton(string iconName, float width, float height, ButtonState state = ButtonState.Normal)
+        public static bool IconButton(string iconName,
+            float width = Config.ICON_BUTTON_WIDTH,
+            float height = Config.ICON_BUTTON_HEIGHT,
+            ButtonState state = ButtonState.Normal)
         {
             return IconButton(Resources.Load(iconName) as Texture, width, height, null, state);
         }
 
-        public static bool IconButton(string iconName, float width, float height, GUIStyle style, ButtonState state = ButtonState.Normal)
+        public static bool IconButton(string iconName,
+            float width,
+            float height,
+            GUIStyle style,
+            ButtonState state = ButtonState.Normal)
         {
             return IconButton(Resources.Load(iconName) as Texture, width, height, style, state);
         }
 
-        public static bool IconButton(Texture texture, ButtonState state = ButtonState.Normal)
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static bool IconButton(Texture texture, ButtonState state)
         {
-            return IconButton(texture, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, null, state);
+            return IconButton(new GUIContent(texture), Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, null, state);
         }
 
-        public static bool IconButton(Texture texture, float width, float height, ButtonState state = ButtonState.Normal)
+        public static bool IconButton(Texture texture,
+            float width = Config.ICON_BUTTON_WIDTH,
+            float height = Config.ICON_BUTTON_HEIGHT,
+            ButtonState state = ButtonState.Normal)
         {
-            return IconButton(texture, width, height, null, state);
+            return IconButton(new GUIContent(texture), width, height, null, state);
         }
 
-        public static bool IconButton(Texture texture, float width, float height, GUIStyle style, ButtonState state = ButtonState.Normal)
+        public static bool IconButton(Texture texture,
+            float width,
+            float height,
+            GUIStyle style,
+            ButtonState state = ButtonState.Normal)
+        {
+            return IconButton(new GUIContent(texture), width, height, style, state);
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static bool IconButton(GUIContent content, ButtonState state)
+        {
+            return IconButton(content, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, null, state);
+        }
+
+        public static bool IconButton(GUIContent content,
+            float width = Config.ICON_BUTTON_WIDTH,
+            float height = Config.ICON_BUTTON_HEIGHT,
+            ButtonState state = ButtonState.Normal)
+        {
+            return IconButton(content, width, height, null, state);
+        }
+
+        public static bool IconButton(GUIContent content,
+            float width,
+            float height,
+            GUIStyle style,
+            ButtonState state = ButtonState.Normal)
         {
             if (style == null)
                 style = iconButtonStyle;
 
             ApplyButtonState(state);
 
-            bool res = GUILayout.Button(texture, style, new GUILayoutOption[]
+            bool res = GUILayout.Button(content, style, new GUILayoutOption[]
             {
                 GUILayout.Width(width),
                 GUILayout.Height(height)
