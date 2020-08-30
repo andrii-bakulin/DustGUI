@@ -119,7 +119,11 @@ namespace DustEngine
 
         public static void SpaceExpand(float width = 6f)
         {
+#if UNITY_2019_1_OR_NEWER
             EditorGUILayout.Space(width, true);
+#else
+            EditorGUILayout.Space();
+#endif
         }
 
         public static void Lock()
