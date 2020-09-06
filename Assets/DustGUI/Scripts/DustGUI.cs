@@ -7,7 +7,12 @@ namespace DustEngine
     public static partial class DustGUI
     {
 #if UNITY_EDITOR
-        public static void Header(string title, float width = 0, float height = 0)
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static void Header(string title)
+            => Header(title, 0, 0);
+
+        public static void Header(string title, float width, float height)
         {
             EditorGUILayout.LabelField(title, EditorStyles.boldLabel, PackOptions(width, height));
         }
@@ -18,15 +23,14 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static void Label(string title, GUIStyle style)
-        {
-            Label(title, 0, 0, style);
-        }
+        public static void Label(string title)
+            => Label(title, 0, 0);
 
-        public static void Label(string title, float width = 0f, float height = 0f)
-        {
-            Label(title, width, height, labelNormalColor);
-        }
+        public static void Label(string title, float width, float height)
+            => Label(title, width, height, labelNormalColor);
+
+        public static void Label(string title, GUIStyle style)
+            => Label(title, 0, 0, style);
 
         public static void Label(string title, float width, float height, Color color)
         {
@@ -40,6 +44,7 @@ namespace DustEngine
         {
             EditorGUILayout.LabelField(title, style, PackOptions(width, height));
         }
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public static void SimpleLabel(string title)
@@ -96,7 +101,10 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static void Space(float width = 6f)
+        public static void Space()
+            => Space(6f);
+
+        public static void Space(float width)
         {
 #if UNITY_2019_1_OR_NEWER
             EditorGUILayout.Space(width);
@@ -105,7 +113,12 @@ namespace DustEngine
 #endif
         }
 
-        public static void SpaceLine(float width = 1f)
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static void SpaceLine()
+            => SpaceLine(1f);
+
+        public static void SpaceLine(float width)
         {
 #if UNITY_2019_1_OR_NEWER
             EditorGUILayout.Space(width * EditorGUIUtility.singleLineHeight);
@@ -117,7 +130,12 @@ namespace DustEngine
 #endif
         }
 
-        public static void SpaceExpand(float width = 6f)
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static void SpaceExpand()
+            => SpaceExpand(6f);
+
+        public static void SpaceExpand(float width)
         {
 #if UNITY_2019_1_OR_NEWER
             EditorGUILayout.Space(width, true);
@@ -125,6 +143,8 @@ namespace DustEngine
             EditorGUILayout.Space();
 #endif
         }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public static void Lock()
         {
@@ -154,7 +174,10 @@ namespace DustEngine
             indentLevel--;
         }
 
-        public static int IndentLevelReset(int newValue = 0)
+        public static int IndentLevelReset()
+            => IndentLevelReset(0);
+
+        public static int IndentLevelReset(int newValue)
         {
             int prevValue = indentLevel;
             indentLevel = newValue;
