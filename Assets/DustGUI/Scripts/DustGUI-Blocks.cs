@@ -6,20 +6,31 @@ namespace DustEngine
 {
     public static partial class DustGUI
     {
-        public static Rect BeginHorizontal(float width = 0, float height = 0)
-        {
-            return BeginHorizontal(GUIStyle.none, width, height);
-        }
+        public static Rect BeginHorizontal()
+            => BeginHorizontal(GUIStyle.none, 0, 0);
 
-        public static Rect BeginHorizontalBox(float width = 0, float height = 0)
-        {
-            return BeginHorizontal("box", width, height);
-        }
+        public static Rect BeginHorizontal(float width, float height)
+            => BeginHorizontal(GUIStyle.none, width, height);
 
-        public static Rect BeginHorizontal(GUIStyle style, float width = 0, float height = 0)
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static Rect BeginHorizontalBox()
+            => BeginHorizontal("box", 0, 0);
+
+        public static Rect BeginHorizontalBox(float width, float height)
+            => BeginHorizontal("box", width, height);
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static Rect BeginHorizontal(GUIStyle style)
+            => BeginHorizontal(style, 0, 0);
+
+        public static Rect BeginHorizontal(GUIStyle style, float width, float height)
         {
             return EditorGUILayout.BeginHorizontal(style, PackOptions(width, height));
         }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public static void EndHorizontal()
         {
@@ -28,20 +39,31 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static Rect BeginVertical(float width = 0, float height = 0)
-        {
-            return BeginVertical(GUIStyle.none, width, height);
-        }
+        public static Rect BeginVertical()
+            => BeginVertical(GUIStyle.none, 0, 0);
 
-        public static Rect BeginVerticalBox(float width = 0, float height = 0)
-        {
-            return BeginVertical("box", width, height);
-        }
+        public static Rect BeginVertical(float width, float height)
+            => BeginVertical(GUIStyle.none, width, height);
 
-        public static Rect BeginVertical(GUIStyle style, float width = 0, float height = 0)
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static Rect BeginVerticalBox()
+            => BeginVertical("box", 0, 0);
+
+        public static Rect BeginVerticalBox(float width, float height)
+            => BeginVertical("box", width, height);
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static Rect BeginVertical(GUIStyle style)
+            => BeginVertical(style, 0, 0);
+
+        public static Rect BeginVertical(GUIStyle style, float width, float height)
         {
             return EditorGUILayout.BeginVertical(style, PackOptions(width, height));
         }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public static void EndVertical()
         {
@@ -50,10 +72,22 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static bool FoldoutBegin(string title, string foldoutId, bool defaultState = true)
+        public static bool FoldoutBegin(string title, string foldoutId)
+            => FoldoutBegin(title, foldoutId, null, true);
+
+        public static bool FoldoutBegin(string title, string foldoutId, bool defaultState)
+            => FoldoutBegin(title, foldoutId, null, defaultState);
+
+        public static bool FoldoutBegin(string title, string foldoutId, Object targetId)
+            => FoldoutBegin(title, foldoutId, targetId, true);
+
+        public static bool FoldoutBegin(string title, string foldoutId, Object targetId, bool defaultState)
         {
 #if UNITY_2019_1_OR_NEWER
             string key = "DustEngine.DustGUI.Foldout." + foldoutId;
+
+            if (targetId != null)
+                key += "." + targetId.GetInstanceID();
 
             bool state = SessionState.GetBool(key, defaultState);
             state = EditorGUILayout.BeginFoldoutHeaderGroup(state, title);
@@ -91,24 +125,36 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static Vector2 BeginScrollView(Vector2 scrollPosition, float width = 0, float height = 0)
-        {
-            return BeginScrollView(scrollPosition, GUIStyle.none, width, height);
-        }
+        public static Vector2 BeginScrollView(Vector2 scrollPosition)
+            => BeginScrollView(scrollPosition, GUIStyle.none, 0, 0);
 
-        public static Vector2 BeginScrollView(Vector2 scrollPosition, GUIStyle style, float width = 0, float height = 0)
+        public static Vector2 BeginScrollView(Vector2 scrollPosition, float width, float height)
+            => BeginScrollView(scrollPosition, GUIStyle.none, width, height);
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static Vector2 BeginScrollView(Vector2 scrollPosition, GUIStyle style)
+            => BeginScrollView(scrollPosition, style, 0, 0);
+
+        public static Vector2 BeginScrollView(Vector2 scrollPosition, GUIStyle style, float width, float height)
         {
             return EditorGUILayout.BeginScrollView(scrollPosition, style, PackOptions(width, height));
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static bool BeginScrollView(ref Vector2 scrollPosition, float width = 0, float height = 0)
-        {
-            return BeginScrollView(ref scrollPosition, GUIStyle.none, width, height);
-        }
+        public static bool BeginScrollView(ref Vector2 scrollPosition)
+            => BeginScrollView(ref scrollPosition, GUIStyle.none, 0, 0);
 
-        public static bool BeginScrollView(ref Vector2 scrollPosition, GUIStyle style, float width = 0, float height = 0)
+        public static bool BeginScrollView(ref Vector2 scrollPosition, float width, float height)
+            => BeginScrollView(ref scrollPosition, GUIStyle.none, width, height);
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static bool BeginScrollView(ref Vector2 scrollPosition, GUIStyle style)
+            => BeginScrollView(ref scrollPosition, style, 0, 0);
+
+        public static bool BeginScrollView(ref Vector2 scrollPosition, GUIStyle style, float width, float height)
         {
             var lastPosition = scrollPosition;
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, style, PackOptions(width, height));
