@@ -32,16 +32,18 @@ namespace DustEngine
             //----------------------------------------------------------------------------------------------------------
 
             public static SliderExt Create()
-            {
-                return new SliderExt();
-            }
+                => Create(0f, 1f, 0.01f, float.MinValue, float.MaxValue);
 
             public static SliderExt Create01()
-            {
-                return new SliderExt(0f, 1f, 0.01f, 0f, 1f);
-            }
+                => Create(0f, 1f, 0.01f, 0f, 1f);
 
-            public static SliderExt Create(float sliderMin, float sliderMax, float sliderStep = 0f, float limitMin = float.MinValue, float limitMax = float.MaxValue)
+            public static SliderExt Create(float sliderMin, float sliderMax)
+                => Create(sliderMin, sliderMax, 0f, float.MinValue, float.MaxValue);
+
+            public static SliderExt Create(float sliderMin, float sliderMax, float sliderStep)
+                => Create(sliderMin, sliderMax, sliderStep, float.MinValue, float.MaxValue);
+
+            public static SliderExt Create(float sliderMin, float sliderMax, float sliderStep, float limitMin, float limitMax)
             {
                 return new SliderExt(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
             }
@@ -53,7 +55,17 @@ namespace DustEngine
                 Init(0f, 1f, 0f, float.MinValue, float.MaxValue);
             }
 
-            public SliderExt(float sliderMin, float sliderMax, float sliderStep = 0f, float limitMin = float.MinValue, float limitMax = float.MaxValue)
+            public SliderExt(float sliderMin, float sliderMax)
+            {
+                Init(sliderMin, sliderMax, 0f, float.MinValue, float.MaxValue);
+            }
+
+            public SliderExt(float sliderMin, float sliderMax, float sliderStep)
+            {
+                Init(sliderMin, sliderMax, sliderStep, float.MinValue, float.MaxValue);
+            }
+
+            public SliderExt(float sliderMin, float sliderMax, float sliderStep, float limitMin, float limitMax)
             {
                 Init(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
             }
@@ -72,7 +84,10 @@ namespace DustEngine
                 return this;
             }
 
-            public SliderExt SetSlider(float setSliderMin, float setSliderMax, float setSliderStep = 0f)
+            public SliderExt SetSlider(float setSliderMin, float setSliderMax)
+                => SetSlider(setSliderMin, setSliderMax, 0f);
+
+            public SliderExt SetSlider(float setSliderMin, float setSliderMax, float setSliderStep)
             {
                 sliderMin = Mathf.Min(setSliderMin, setSliderMax);
                 sliderMax = Mathf.Max(setSliderMin, setSliderMax);
