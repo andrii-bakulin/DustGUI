@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine
 {
     public static partial class DustGUI
@@ -156,4 +155,3 @@ namespace DustEngine
         }
     }
 }
-#endif

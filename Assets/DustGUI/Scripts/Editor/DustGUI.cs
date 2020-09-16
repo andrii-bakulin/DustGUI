@@ -6,7 +6,6 @@ namespace DustEngine
 {
     public static partial class DustGUI
     {
-#if UNITY_EDITOR
         //--------------------------------------------------------------------------------------------------------------
 
         public static void Header(string title)
@@ -207,6 +206,5 @@ namespace DustEngine
 
             return options.ToArray();
         }
-#endif
     }
 }
