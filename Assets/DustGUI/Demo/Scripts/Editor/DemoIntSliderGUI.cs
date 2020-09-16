@@ -41,6 +41,8 @@ namespace DustDemo
 
             // Use one Slider instance to draw few UI-Elements
             var slider = new DustGUI.IntSliderExt(-50, 50, 5, -100, 100);
+            slider.LinkEditor(this);
+
             value3 = slider.Draw(value3);
             value4 = slider.Draw("Title", value4);
             value5 = slider.Draw(new GUIContent("Title with tooltip", "Tooltip here"), value5);

@@ -14,6 +14,8 @@ namespace DustEngine
                 public bool showValue = true;
             }
 
+            public static Rect s_SliderDraggingRect = Rect.zero;
+
             public UIConfig ui = new UIConfig();
 
             public int sliderMin;
@@ -150,14 +152,14 @@ namespace DustEngine
                 int oldValue;
                 int newValue;
 
-                Rect sliderRect = EditorGUILayout.BeginHorizontal();
+                Rect labelRect = Rect.zero;
+
+                EditorGUILayout.BeginHorizontal();
                 {
                     if (ui.showLabel && label != null)
                     {
                         EditorGUILayout.PrefixLabel(label);
-
-                        Rect labelRect = sliderRect;
-                        labelRect.width *= 0.33f; // Cannot find better solution for now
+                        labelRect = GUILayoutUtility.GetLastRect();
 
                         EditorGUIUtility.AddCursorRect(labelRect, MouseCursor.SlideArrow);
                     }
@@ -219,14 +221,19 @@ namespace DustEngine
                 }
                 EditorGUILayout.EndHorizontal();
 
-                if (sliderRect.Contains(Event.current.mousePosition))
+                if (!labelRect.Equals(Rect.zero))
                 {
-                    if (Event.current.type == EventType.MouseDrag)
+                    if (Event.current.type == EventType.MouseDown && labelRect.Contains(Event.current.mousePosition))
                     {
-                        deltaChange = Mathf.RoundToInt(sliderStep * Event.current.delta.x);
-
-                        if (editor != null)
-                            editor.Repaint();
+                        s_SliderDraggingRect = labelRect;
+                    }
+                    else if (Event.current.type == EventType.MouseUp)
+                    {
+                        s_SliderDraggingRect = Rect.zero;
+                    }
+                    else if (Event.current.type == EventType.MouseDrag && labelRect.Equals(s_SliderDraggingRect))
+                    {
+                        deltaChange = Mathf.CeilToInt(sliderStep * Event.current.delta.x * 0.25f); // 0.25f -> downgrade sensitivity
                     }
                 }
 
@@ -239,6 +246,9 @@ namespace DustEngine
                     {
                         value = newValue;
                         isChanged = true;
+
+                        if (editor != null)
+                            editor.Repaint();
                     }
                 }
 
