@@ -12,6 +12,9 @@ namespace DustEngine
         public static void Header(string title)
             => Header(title, 0, 0);
 
+        public static void Header(string title, float width)
+            => Header(title, width, 0);
+
         public static void Header(string title, float width, float height)
         {
             EditorGUILayout.LabelField(title, EditorStyles.boldLabel, PackOptions(width, height));
@@ -25,6 +28,9 @@ namespace DustEngine
 
         public static void Label(string title)
             => Label(title, 0, 0);
+
+        public static void Label(string title, float width)
+            => Label(title, width, 0);
 
         public static void Label(string title, float width, float height)
             => Label(title, width, height, labelNormalColor);
@@ -48,19 +54,16 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public static void SimpleLabel(string title)
-        {
-            SimpleLabel(title, 0, 0, labelNormalColor);
-        }
+            => SimpleLabel(title, 0, 0, labelNormalColor);
 
         public static void SimpleLabel(string title, GUIStyle style)
-        {
-            SimpleLabel(title, 0, 0, style);
-        }
+            => SimpleLabel(title, 0, 0, style);
+
+        public static void SimpleLabel(string title, float width)
+            => SimpleLabel(title, width, 0, labelNormalColor);
 
         public static void SimpleLabel(string title, float width, float height)
-        {
-            SimpleLabel(title, width, height, labelNormalColor);
-        }
+            => SimpleLabel(title, width, height, labelNormalColor);
 
         public static void SimpleLabel(string title, float width, float height, Color color)
         {
@@ -85,19 +88,13 @@ namespace DustEngine
         }
 
         public static void HelpBoxInfo(string message)
-        {
-            EditorGUILayout.HelpBox(message, MessageType.Info);
-        }
+            => EditorGUILayout.HelpBox(message, MessageType.Info);
 
         public static void HelpBoxWarning(string message)
-        {
-            EditorGUILayout.HelpBox(message, MessageType.Warning);
-        }
+            => EditorGUILayout.HelpBox(message, MessageType.Warning);
 
         public static void HelpBoxError(string message)
-        {
-            EditorGUILayout.HelpBox(message, MessageType.Error);
-        }
+            => EditorGUILayout.HelpBox(message, MessageType.Error);
 
         //--------------------------------------------------------------------------------------------------------------
 
