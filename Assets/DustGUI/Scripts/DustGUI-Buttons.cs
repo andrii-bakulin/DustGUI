@@ -79,6 +79,9 @@ namespace DustEngine
         public static bool IconButton(string iconName, ButtonState state)
             => IconButton(Resources.Load(iconName) as Texture, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, null, state);
 
+        public static bool IconButton(string iconName, GUIStyle style)
+            => IconButton(Resources.Load(iconName) as Texture, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, style, ButtonState.Normal);
+
         public static bool IconButton(string iconName, float width, float height)
             => IconButton(Resources.Load(iconName) as Texture, width, height, null, ButtonState.Normal);
 
@@ -99,6 +102,9 @@ namespace DustEngine
         public static bool IconButton(Texture texture, ButtonState state)
             => IconButton(new GUIContent(texture), Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, null, state);
 
+        public static bool IconButton(Texture texture, GUIStyle style)
+            => IconButton(new GUIContent(texture), Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, style, ButtonState.Normal);
+
         public static bool IconButton(Texture texture, float width, float height)
             => IconButton(new GUIContent(texture), width, height, null, ButtonState.Normal);
 
@@ -118,6 +124,9 @@ namespace DustEngine
 
         public static bool IconButton(GUIContent content, ButtonState state)
             => IconButton(content, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, null, state);
+
+        public static bool IconButton(GUIContent content, GUIStyle style)
+            => IconButton(content, Config.ICON_BUTTON_WIDTH, Config.ICON_BUTTON_HEIGHT, style, ButtonState.Normal);
 
         public static bool IconButton(GUIContent content, float width, float height)
             => IconButton(content, width, height, null, ButtonState.Normal);
