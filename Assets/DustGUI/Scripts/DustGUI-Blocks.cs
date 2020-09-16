@@ -9,6 +9,9 @@ namespace DustEngine
         public static Rect BeginHorizontal()
             => BeginHorizontal(GUIStyle.none, 0, 0);
 
+        public static Rect BeginHorizontal(float width)
+            => BeginHorizontal(GUIStyle.none, width, 0);
+
         public static Rect BeginHorizontal(float width, float height)
             => BeginHorizontal(GUIStyle.none, width, height);
 
@@ -17,6 +20,9 @@ namespace DustEngine
         public static Rect BeginHorizontalBox()
             => BeginHorizontal("box", 0, 0);
 
+        public static Rect BeginHorizontalBox(float width)
+            => BeginHorizontal("box", width, 0);
+
         public static Rect BeginHorizontalBox(float width, float height)
             => BeginHorizontal("box", width, height);
 
@@ -24,6 +30,9 @@ namespace DustEngine
 
         public static Rect BeginHorizontal(GUIStyle style)
             => BeginHorizontal(style, 0, 0);
+
+        public static Rect BeginHorizontal(GUIStyle style, float width)
+            => BeginHorizontal(style, width, 0);
 
         public static Rect BeginHorizontal(GUIStyle style, float width, float height)
         {
@@ -42,6 +51,9 @@ namespace DustEngine
         public static Rect BeginVertical()
             => BeginVertical(GUIStyle.none, 0, 0);
 
+        public static Rect BeginVertical(float width)
+            => BeginVertical(GUIStyle.none, width, 0);
+
         public static Rect BeginVertical(float width, float height)
             => BeginVertical(GUIStyle.none, width, height);
 
@@ -50,6 +62,9 @@ namespace DustEngine
         public static Rect BeginVerticalBox()
             => BeginVertical("box", 0, 0);
 
+        public static Rect BeginVerticalBox(float width)
+            => BeginVertical("box", width, 0);
+
         public static Rect BeginVerticalBox(float width, float height)
             => BeginVertical("box", width, height);
 
@@ -57,6 +72,9 @@ namespace DustEngine
 
         public static Rect BeginVertical(GUIStyle style)
             => BeginVertical(style, 0, 0);
+
+        public static Rect BeginVertical(GUIStyle style, float width)
+            => BeginVertical(style, width, 0);
 
         public static Rect BeginVertical(GUIStyle style, float width, float height)
         {
@@ -128,6 +146,9 @@ namespace DustEngine
         public static Vector2 BeginScrollView(Vector2 scrollPosition)
             => BeginScrollView(scrollPosition, GUIStyle.none, 0, 0);
 
+        public static Vector2 BeginScrollView(Vector2 scrollPosition, float width)
+            => BeginScrollView(scrollPosition, GUIStyle.none, width, 0);
+
         public static Vector2 BeginScrollView(Vector2 scrollPosition, float width, float height)
             => BeginScrollView(scrollPosition, GUIStyle.none, width, height);
 
@@ -135,6 +156,9 @@ namespace DustEngine
 
         public static Vector2 BeginScrollView(Vector2 scrollPosition, GUIStyle style)
             => BeginScrollView(scrollPosition, style, 0, 0);
+
+        public static Vector2 BeginScrollView(Vector2 scrollPosition, GUIStyle style, float width)
+            => BeginScrollView(scrollPosition, style, width, 0);
 
         public static Vector2 BeginScrollView(Vector2 scrollPosition, GUIStyle style, float width, float height)
         {
@@ -146,6 +170,9 @@ namespace DustEngine
         public static bool BeginScrollView(ref Vector2 scrollPosition)
             => BeginScrollView(ref scrollPosition, GUIStyle.none, 0, 0);
 
+        public static bool BeginScrollView(ref Vector2 scrollPosition, float width)
+            => BeginScrollView(ref scrollPosition, GUIStyle.none, width, 0);
+
         public static bool BeginScrollView(ref Vector2 scrollPosition, float width, float height)
             => BeginScrollView(ref scrollPosition, GUIStyle.none, width, height);
 
@@ -153,6 +180,9 @@ namespace DustEngine
 
         public static bool BeginScrollView(ref Vector2 scrollPosition, GUIStyle style)
             => BeginScrollView(ref scrollPosition, style, 0, 0);
+
+        public static bool BeginScrollView(ref Vector2 scrollPosition, GUIStyle style, float width)
+            => BeginScrollView(ref scrollPosition, style, width, 0);
 
         public static bool BeginScrollView(ref Vector2 scrollPosition, GUIStyle style, float width, float height)
         {
