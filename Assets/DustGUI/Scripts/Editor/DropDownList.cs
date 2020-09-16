@@ -32,9 +32,9 @@ namespace DustEngine
         public static int DropDownList(string label, int selectedIndex, string[] displayedOptions, float width, float height, GUIStyle style)
         {
             if (label == null)
-                return EditorGUILayout.Popup(selectedIndex, displayedOptions, style, PackOptions(width, height));
+                return EditorGUILayout.Popup(selectedIndex, displayedOptions, style, NewLayoutOptions(width, height).Build());
 
-            return EditorGUILayout.Popup(label, selectedIndex, displayedOptions, style, PackOptions(width, height));
+            return EditorGUILayout.Popup(label, selectedIndex, displayedOptions, style, NewLayoutOptions(width, height).Build());
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ namespace DustEngine
 
         public static Enum DropDownList(Enum selected, float width, float height, GUIStyle style)
         {
-            return EditorGUILayout.EnumPopup(selected, style, PackOptions(width, height));
+            return EditorGUILayout.EnumPopup(selected, style, NewLayoutOptions(width, height).Build());
         }
     }
 }

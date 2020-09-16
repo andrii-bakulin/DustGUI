@@ -7,6 +7,7 @@ namespace DustEngine
     public static partial class DustGUI
     {
         //--------------------------------------------------------------------------------------------------------------
+        // Header
 
         public static void Header(string title)
             => Header(title, 0, 0);
@@ -16,10 +17,11 @@ namespace DustEngine
 
         public static void Header(string title, float width, float height)
         {
-            EditorGUILayout.LabelField(title, EditorStyles.boldLabel, PackOptions(width, height));
+            EditorGUILayout.LabelField(title, EditorStyles.boldLabel, NewLayoutOptions(width, height).Build());
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Label
 
         public static Color labelNormalColor => GUI.skin.label.normal.textColor;
 
@@ -47,7 +49,7 @@ namespace DustEngine
 
         public static void Label(string title, float width, float height, GUIStyle style)
         {
-            EditorGUILayout.LabelField(title, style, PackOptions(width, height));
+            EditorGUILayout.LabelField(title, style, NewLayoutOptions(width, height).Build());
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -74,7 +76,7 @@ namespace DustEngine
 
         public static void SimpleLabel(string title, float width, float height, GUIStyle style)
         {
-            GUILayout.Label(title, style, PackOptions(width, height));
+            GUILayout.Label(title, style, NewLayoutOptions(width, height).Build());
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -194,17 +196,5 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static GUILayoutOption[] PackOptions(float width, float height)
-        {
-            var options = new List<GUILayoutOption>();
-
-            if (width > 0f)
-                options.Add(GUILayout.Width(width));
-
-            if (height > 0f)
-                options.Add(GUILayout.Height(height));
-
-            return options.ToArray();
-        }
     }
 }

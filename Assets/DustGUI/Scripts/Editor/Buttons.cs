@@ -63,7 +63,7 @@ namespace DustEngine
         {
             ApplyButtonState(state);
 
-            bool res = GUILayout.Button(label, PackOptions(width, height));
+            bool res = GUILayout.Button(label, NewLayoutOptions(width, height).Build());
 
             RollbackButtonState();
 
