@@ -4,19 +4,6 @@ using UnityEngine;
 
 namespace DustDemo
 {
-    public class DemoSlider : MonoBehaviour
-    {
-        [SerializeField] private float value1 = 1.5f;
-        [SerializeField] private float value2 = 5.0f;
-
-        private void Update()
-        {
-            Debug.Log("Float Value1 = " + value1.ToString("F3"));
-            Debug.Log("Float Value2 = " + value2.ToString("F3"));
-        }
-    }
-
-#if UNITY_EDITOR
     [CustomEditor(typeof(DemoSlider))]
     public class DemoSliderGUI : Editor
     {
@@ -42,12 +29,9 @@ namespace DustDemo
             DustGUI.SpaceLine();
 
 
-            DustGUI.SliderExt.Create(1f, 2f, 0.01f, 0f, 5f).LinkEditor(this)
-                .Draw("[0f .. [1f - 2f] .. 5f]", spValue1);
+            DustGUI.SliderExt.Create(1f, 2f, 0.01f, 0f, 5f).LinkEditor(this).Draw("[0f .. [1f - 2f] .. 5f]", spValue1);
 
-            DustGUI.SliderExt.Create().LinkEditor(this)
-                .SetSlider(1f, 10f)
-                .Draw("[.... [1f - 10f] ....]", spValue2);
+            DustGUI.SliderExt.Create().LinkEditor(this).SetSlider(1f, 10f).Draw("[.... [1f - 10f] ....]", spValue2);
 
 
             DustGUI.SpaceLine();
@@ -64,5 +48,4 @@ namespace DustDemo
             serializedObject.ApplyModifiedProperties();
         }
     }
-#endif
 }
