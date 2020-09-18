@@ -29,9 +29,9 @@ namespace DustDemo
             DustGUI.SpaceLine();
 
 
-            DustGUI.IntSliderExt.Create(10, 20, 1, 0, 50).LinkEditor(this).Draw("[0 .. [10 - 20] .. 50]", spValue1);
+            DustGUI.ExtraIntSlider.Create(10, 20, 1, 0, 50).LinkEditor(this).Draw("[0 .. [10 - 20] .. 50]", spValue1);
 
-            DustGUI.IntSliderExt.Create().LinkEditor(this).SetSlider(1, 100).Draw("[.... [1 - 100] ....]", spValue2);
+            DustGUI.ExtraIntSlider.Create().LinkEditor(this).SetSlider(1, 100).Draw("[.... [1 - 100] ....]", spValue2);
 
 
             DustGUI.SpaceLine();
@@ -40,7 +40,7 @@ namespace DustDemo
             DustGUI.Label("[-100 .. [-50 - 50] .. 100]");
 
             // Use one Slider instance to draw few UI-Elements
-            var slider = new DustGUI.IntSliderExt(-50, 50, 5, -100, 100);
+            var slider = new DustGUI.ExtraIntSlider(-50, 50, 5, -100, 100);
             slider.LinkEditor(this);
 
             value3 = slider.Draw(value3);

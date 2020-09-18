@@ -5,7 +5,7 @@ namespace DustEngine
 {
     public static partial class DustGUI
     {
-        public class SliderExt
+        public class ExtraSlider
         {
             public class UIConfig
             {
@@ -32,41 +32,41 @@ namespace DustEngine
 
             //----------------------------------------------------------------------------------------------------------
 
-            public static SliderExt Create()
+            public static ExtraSlider Create()
                 => Create(0f, 1f, 0.01f, float.MinValue, float.MaxValue);
 
-            public static SliderExt Create01()
+            public static ExtraSlider Create01()
                 => Create(0f, 1f, 0.01f, 0f, 1f);
 
-            public static SliderExt Create(float sliderMin, float sliderMax)
+            public static ExtraSlider Create(float sliderMin, float sliderMax)
                 => Create(sliderMin, sliderMax, 0f, float.MinValue, float.MaxValue);
 
-            public static SliderExt Create(float sliderMin, float sliderMax, float sliderStep)
+            public static ExtraSlider Create(float sliderMin, float sliderMax, float sliderStep)
                 => Create(sliderMin, sliderMax, sliderStep, float.MinValue, float.MaxValue);
 
-            public static SliderExt Create(float sliderMin, float sliderMax, float sliderStep, float limitMin, float limitMax)
+            public static ExtraSlider Create(float sliderMin, float sliderMax, float sliderStep, float limitMin, float limitMax)
             {
-                return new SliderExt(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
+                return new ExtraSlider(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            public SliderExt()
+            public ExtraSlider()
             {
                 Init(0f, 1f, 0f, float.MinValue, float.MaxValue);
             }
 
-            public SliderExt(float sliderMin, float sliderMax)
+            public ExtraSlider(float sliderMin, float sliderMax)
             {
                 Init(sliderMin, sliderMax, 0f, float.MinValue, float.MaxValue);
             }
 
-            public SliderExt(float sliderMin, float sliderMax, float sliderStep)
+            public ExtraSlider(float sliderMin, float sliderMax, float sliderStep)
             {
                 Init(sliderMin, sliderMax, sliderStep, float.MinValue, float.MaxValue);
             }
 
-            public SliderExt(float sliderMin, float sliderMax, float sliderStep, float limitMin, float limitMax)
+            public ExtraSlider(float sliderMin, float sliderMax, float sliderStep, float limitMin, float limitMax)
             {
                 Init(sliderMin, sliderMax, sliderStep, limitMin, limitMax);
             }
@@ -79,16 +79,16 @@ namespace DustEngine
 
             //----------------------------------------------------------------------------------------------------------
 
-            public SliderExt LinkEditor(Editor parentEditor)
+            public ExtraSlider LinkEditor(Editor parentEditor)
             {
                 editor = parentEditor;
                 return this;
             }
 
-            public SliderExt SetSlider(float setSliderMin, float setSliderMax)
+            public ExtraSlider SetSlider(float setSliderMin, float setSliderMax)
                 => SetSlider(setSliderMin, setSliderMax, 0f);
 
-            public SliderExt SetSlider(float setSliderMin, float setSliderMax, float setSliderStep)
+            public ExtraSlider SetSlider(float setSliderMin, float setSliderMax, float setSliderStep)
             {
                 sliderMin = Mathf.Min(setSliderMin, setSliderMax);
                 sliderMax = Mathf.Max(setSliderMin, setSliderMax);
@@ -97,7 +97,7 @@ namespace DustEngine
                 return this;
             }
 
-            public SliderExt SetLimits(float setLimitMin, float setLimitMax)
+            public ExtraSlider SetLimits(float setLimitMin, float setLimitMax)
             {
                 limitMin = Mathf.Min(setLimitMin, setLimitMax);
                 limitMax = Mathf.Max(setLimitMin, setLimitMax);
