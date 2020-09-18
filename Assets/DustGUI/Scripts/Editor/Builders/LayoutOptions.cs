@@ -29,65 +29,57 @@ namespace DustEngine
 
             //----------------------------------------------------------------------------------------------------------
 
-            public LayoutOptions Width(float width)
+            public LayoutOptions Width(float value)
             {
-                if (width > 0f)
-                    m_Options.Add(GUILayout.Width(width));
+                if (value > 0f)
+                    m_Options.Add(GUILayout.Width(value));
 
                 return this;
             }
 
-            public LayoutOptions MinWidth(float width)
+            public LayoutOptions MinWidth(float value)
             {
-                if (width > 0f)
-                    m_Options.Add(GUILayout.MinWidth(width));
-
+                m_Options.Add(GUILayout.MinWidth(value));
                 return this;
             }
 
-            public LayoutOptions MaxWidth(float width)
+            public LayoutOptions MaxWidth(float value)
             {
-                if (width > 0f)
-                    m_Options.Add(GUILayout.MaxWidth(width));
-
+                m_Options.Add(GUILayout.MaxWidth(value));
                 return this;
             }
 
-            public LayoutOptions ExpandWidth(bool expand)
+            public LayoutOptions ExpandWidth(bool value)
             {
-                m_Options.Add(GUILayout.ExpandWidth(expand));
+                m_Options.Add(GUILayout.ExpandWidth(value));
                 return this;
             }
 
             //----------------------------------------------------------------------------------------------------------
 
-            public LayoutOptions Height(float height)
+            public LayoutOptions Height(float value)
             {
-                if (height > 0f)
-                    m_Options.Add(GUILayout.Height(height));
+                if (value > 0f)
+                    m_Options.Add(GUILayout.Height(value));
 
                 return this;
             }
 
-            public LayoutOptions MinHeight(float height)
+            public LayoutOptions MinHeight(float value)
             {
-                if (height > 0f)
-                    m_Options.Add(GUILayout.MinHeight(height));
-
+                m_Options.Add(GUILayout.MinHeight(value));
                 return this;
             }
 
-            public LayoutOptions MaxHeight(float height)
+            public LayoutOptions MaxHeight(float value)
             {
-                if (height > 0f)
-                    m_Options.Add(GUILayout.MaxHeight(height));
-
+                m_Options.Add(GUILayout.MaxHeight(value));
                 return this;
             }
 
-            public LayoutOptions ExpandHeight(bool expand)
+            public LayoutOptions ExpandHeight(bool value)
             {
-                m_Options.Add(GUILayout.ExpandHeight(expand));
+                m_Options.Add(GUILayout.ExpandHeight(value));
                 return this;
             }
 

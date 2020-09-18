@@ -84,9 +84,9 @@ namespace DustEngine
             //----------------------------------------------------------------------------------------------------------
             // Alignment
 
-            public Style Alignment(TextAnchor alignment)
+            public Style Alignment(TextAnchor value)
             {
-                m_GUIStyle.alignment = alignment;
+                m_GUIStyle.alignment = value;
                 return this;
             }
 
