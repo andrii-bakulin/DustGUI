@@ -33,9 +33,15 @@ namespace DustEngine
 
             //----------------------------------------------------------------------------------------------------------
 
-            public readonly UIConfig ui = new UIConfig();
+            private UIConfig m_UIConfig = new UIConfig();
+            public UIConfig ui => m_UIConfig;
 
-            protected static Rect s_SliderDraggingRect = Rect.zero;
+            private static Rect s_SliderDraggingRect = Rect.zero;
+            protected static Rect sliderDraggingRect
+            {
+                get => s_SliderDraggingRect;
+                set => s_SliderDraggingRect = value;
+            }
 
             // Link to parent editor require for force repaint it on changing value by dragging
             // But it's optional to use

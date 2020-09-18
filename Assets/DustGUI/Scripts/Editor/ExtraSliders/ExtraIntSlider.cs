@@ -237,13 +237,13 @@ namespace DustEngine
                 {
                     if (Event.current.type == EventType.MouseDown && labelRect.Contains(Event.current.mousePosition))
                     {
-                        s_SliderDraggingRect = labelRect;
+                        sliderDraggingRect = labelRect;
                     }
                     else if (Event.current.type == EventType.MouseUp)
                     {
-                        s_SliderDraggingRect = Rect.zero;
+                        sliderDraggingRect = Rect.zero;
                     }
-                    else if (Event.current.type == EventType.MouseDrag && labelRect.Equals(s_SliderDraggingRect))
+                    else if (Event.current.type == EventType.MouseDrag && labelRect.Equals(sliderDraggingRect))
                     {
                         deltaChange = Mathf.CeilToInt(sliderStep * Event.current.delta.x * 0.25f); // 0.25f -> downgrade sensitivity
                     }
