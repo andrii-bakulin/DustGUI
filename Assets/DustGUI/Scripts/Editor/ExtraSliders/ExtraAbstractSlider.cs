@@ -33,7 +33,7 @@ namespace DustEngine
 
             //----------------------------------------------------------------------------------------------------------
 
-            private UIConfig m_UIConfig = new UIConfig();
+            private readonly UIConfig m_UIConfig = new UIConfig();
             public UIConfig ui => m_UIConfig;
 
             private static Rect s_SliderDraggingRect = Rect.zero;
