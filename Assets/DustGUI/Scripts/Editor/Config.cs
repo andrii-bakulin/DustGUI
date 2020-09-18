@@ -12,6 +12,7 @@ namespace DustEngine
             public static readonly int ICON_BUTTON_PADDING = 2;
 
             public static readonly Color BUTTON_PRESSED_COLOR = new Color(0.75f, 0.75f, 0.75f);
+            public static readonly Color BUTTON_LOCKED_COLOR = new Color(0.5f, 0.5f, 0.5f);
 
             public static readonly string RESOURCE_ICON_ARROW_DOWN = "DustGUI/Arrow-Down";
             public static readonly string RESOURCE_ICON_ARROW_LEFT = "DustGUI/Arrow-Left";

@@ -34,13 +34,15 @@ namespace DustEngine
         {
             m_DefaultBgColor = GUI.backgroundColor;
 
-            switch (state)
+            if (state == ButtonState.Pressed)
             {
-                default:
-                case ButtonState.Normal: break;
-                case ButtonState.Pressed: GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR; break;
-                case ButtonState.Locked: GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR; break;
+                GUI.backgroundColor = Config.BUTTON_PRESSED_COLOR;
             }
+            else if (state == ButtonState.Locked)
+            {
+                GUI.backgroundColor = Config.BUTTON_LOCKED_COLOR;
+            }
+            // else: ButtonState.Normal -> do nothing
         }
 
         private static void RollbackButtonState()
