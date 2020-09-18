@@ -5,30 +5,49 @@ namespace DustEngine
 {
     public static partial class DustGUI
     {
-        public class ExtraSlider
+        public class ExtraSlider : ExtraAbstractSlider
         {
-            public class UIConfig
+            public float m_SliderMin;
+            public float sliderMin
             {
-                public bool showLabel = true;
-                public bool showButtons = true;
-                public bool showValue = true;
+                get => m_SliderMin;
+                set => m_SliderMin = value;
             }
 
-            public static Rect s_SliderDraggingRect = Rect.zero;
+            public float m_SliderMax;
+            public float sliderMax
+            {
+                get => m_SliderMax;
+                set => m_SliderMax = value;
+            }
 
-            public UIConfig ui = new UIConfig();
+            public float m_SliderStep;
+            public float sliderStep
+            {
+                get => m_SliderStep;
+                set => m_SliderStep = value;
+            }
 
-            public float sliderMin;
-            public float sliderMax;
-            public float sliderStep;
-            public float limitMin;
-            public float limitMax;
+            public float m_LimitMin;
+            public float limitMin
+            {
+                get => m_LimitMin;
+                set => m_LimitMin = value;
+            }
 
-            public bool isChanged;
+            public float m_LimitMax;
+            public float limitMax
+            {
+                get => m_LimitMax;
+                set => m_LimitMax = value;
+            }
 
-            // Link to parent editor require for force repaint it on changing value by dragging
-            // But it's optional to use
-            public Editor editor;
+            public bool m_IsChanged;
+            public bool isChanged
+            {
+                get => m_IsChanged;
+                set => m_IsChanged = value;
+            }
 
             //----------------------------------------------------------------------------------------------------------
 
@@ -107,37 +126,31 @@ namespace DustEngine
             //----------------------------------------------------------------------------------------------------------
 
             public float Draw(float value)
-            {
-                return Draw(null, value, null);
-            }
+                => Draw(null, value, null);
 
             public float Draw(string label, float value)
-            {
-                return Draw(new GUIContent(label), value, null);
-            }
+                => Draw(new GUIContent(label), value, null);
 
             public float Draw(GUIContent label, float value)
-            {
-                return Draw(label, value, null);
-            }
+                => Draw(label, value, null);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             public bool Draw(SerializedProperty propertyValue)
             {
-                Draw(null, 0f, propertyValue);
+                propertyValue.floatValue = Draw(null, propertyValue.floatValue, propertyValue);
                 return isChanged;
             }
 
             public bool Draw(string label, SerializedProperty propertyValue)
             {
-                Draw(new GUIContent(label), 0f, propertyValue);
+                propertyValue.floatValue = Draw(new GUIContent(label), propertyValue.floatValue, propertyValue);
                 return isChanged;
             }
 
             public bool Draw(GUIContent label, SerializedProperty propertyValue)
             {
-                Draw(label, 0f, propertyValue);
+                propertyValue.floatValue = Draw(label, propertyValue.floatValue, propertyValue);
                 return isChanged;
             }
 
@@ -145,12 +158,7 @@ namespace DustEngine
 
             private float Draw(GUIContent label, float value, SerializedProperty propertyValue)
             {
-                if (propertyValue != null)
-                    value = propertyValue.floatValue;
-
                 float deltaChange = 0f;
-                float oldValue;
-                float newValue;
 
                 Rect labelRect = Rect.zero;
 
@@ -174,12 +182,12 @@ namespace DustEngine
                     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                     // Slider
 
-                    oldValue = Mathf.Clamp(value, sliderMin, sliderMax);
-                    newValue = GUILayout.HorizontalSlider(oldValue, sliderMin, sliderMax);
+                    var sliderOldValue = Mathf.Clamp(value, sliderMin, sliderMax);
+                    var sliderNewValue = GUILayout.HorizontalSlider(sliderOldValue, sliderMin, sliderMax);
 
-                    if (!oldValue.Equals(newValue))
+                    if (!sliderOldValue.Equals(sliderNewValue))
                     {
-                        value = (float) System.Math.Round(newValue, 2);
+                        value = (float) System.Math.Round(sliderNewValue, 2);
                         isChanged = true;
                     }
 
@@ -194,27 +202,31 @@ namespace DustEngine
 
                     if (ui.showValue)
                     {
+                        float textOldValue;
+                        float textNewValue;
+
                         if (propertyValue != null)
                         {
                             // Because it'll try to add left-spacing when draw text-field
                             int indentLevel = IndentLevelReset();
 
-                            oldValue = propertyValue.floatValue;
+                            textOldValue = propertyValue.floatValue;
                             EditorGUILayout.PropertyField(propertyValue, GUIContent.none, GUILayout.Width(EditorGUIUtility.fieldWidth));
-                            newValue = Mathf.Clamp(propertyValue.floatValue, limitMin, limitMax);
+                            textNewValue = propertyValue.floatValue;
 
                             IndentLevelReset(indentLevel);
                         }
                         else
                         {
-                            oldValue = value;
-                            newValue = EditorGUILayout.FloatField(value, GUILayout.Width(EditorGUIUtility.fieldWidth));
-                            newValue = Mathf.Clamp(newValue, limitMin, limitMax);
+                            textOldValue = value;
+                            textNewValue = EditorGUILayout.FloatField(value, GUILayout.Width(EditorGUIUtility.fieldWidth));
                         }
 
-                        if (!oldValue.Equals(newValue))
+                        textNewValue = Mathf.Clamp(textNewValue, limitMin, limitMax);
+
+                        if (!textOldValue.Equals(textNewValue))
                         {
-                            value = newValue;
+                            value = textNewValue;
                             isChanged = true;
                         }
                     }
@@ -239,9 +251,9 @@ namespace DustEngine
 
                 if (!Mathf.Approximately(deltaChange, 0f))
                 {
-                    oldValue = value;
+                    var oldValue = value;
 
-                    newValue = Mathf.Clamp(oldValue + deltaChange, limitMin, limitMax);
+                    var newValue = Mathf.Clamp(oldValue + deltaChange, limitMin, limitMax);
                     newValue = (float) System.Math.Round(newValue, 2);
 
                     if (!oldValue.Equals(newValue))
@@ -253,9 +265,6 @@ namespace DustEngine
                             editor.Repaint();
                     }
                 }
-
-                if (propertyValue != null)
-                    propertyValue.floatValue = value;
 
                 return value;
             }
