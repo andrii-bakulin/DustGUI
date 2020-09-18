@@ -7,42 +7,42 @@ namespace DustEngine
     {
         public class ExtraIntSlider : ExtraAbstractSlider
         {
-            public int m_SliderMin;
+            private int m_SliderMin;
             public int sliderMin
             {
                 get => m_SliderMin;
                 set => m_SliderMin = value;
             }
 
-            public int m_SliderMax;
+            private int m_SliderMax;
             public int sliderMax
             {
                 get => m_SliderMax;
                 set => m_SliderMax = value;
             }
 
-            public int m_SliderStep;
+            private int m_SliderStep;
             public int sliderStep
             {
                 get => m_SliderStep;
                 set => m_SliderStep = value;
             }
 
-            public int m_LimitMin;
+            private int m_LimitMin;
             public int limitMin
             {
                 get => m_LimitMin;
                 set => m_LimitMin = value;
             }
 
-            public int m_LimitMax;
+            private int m_LimitMax;
             public int limitMax
             {
                 get => m_LimitMax;
                 set => m_LimitMax = value;
             }
 
-            public bool m_IsChanged;
+            private bool m_IsChanged;
             public bool isChanged
             {
                 get => m_IsChanged;
