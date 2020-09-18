@@ -20,7 +20,7 @@ namespace DustEngine
 
         public class LayoutOptions
         {
-            private List<GUILayoutOption> m_Options;
+            private readonly List<GUILayoutOption> m_Options;
 
             public LayoutOptions()
             {
