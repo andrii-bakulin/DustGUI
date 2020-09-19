@@ -190,6 +190,13 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        public static void BlurFocusControl()
+        {
+            GUI.FocusControl("");
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         public static void ForcedRedrawSceneView()
         {
             SceneView.lastActiveSceneView.Repaint();

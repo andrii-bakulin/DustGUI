@@ -225,6 +225,8 @@ DustGUI.Unlock();
 (int) DustGUI.IndentLevelReset(int newValue);
 
 // Helpers
+(void) DustGUI.BlurFocusControl();
+
 (void) DustGUI.ForcedRedrawSceneView();
 (bool) DustGUI.IsUndoRedoPerformed();
 ```
