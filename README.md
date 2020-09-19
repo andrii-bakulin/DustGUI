@@ -12,8 +12,19 @@ DustGUI is library for simplify usage of Unity GUI elements from `GUI`, `GUILayo
 
 DustGUI provides a few new components:
 
-- `DustGUI.ExtraSlider` - extended float-slider supporting out-of-slider-range values
-- `DustGUI.ExtraIntSlider` - extended int-slider supporting out-of-slider-range values
+- [`DustGUI.ExtraSlider`](#dustguiextraslider--dustguiextraintslider) - extended float-slider supporting out-of-slider-range values
+- [`DustGUI.ExtraIntSlider`](#dustguiextraslider--dustguiextraintslider) - extended int-slider supporting out-of-slider-range values
+
+Shortcuts for standard elements:
+
+- [`DustGUI.Basic`](#dustguibasic)
+- [`DustGUI.Block`](#dustguiblock)
+- [`DustGUI.Button`](#dustguibutton)
+- [`DustGUI.DropDownList`](#dustguidropdownlist)
+- [`DustGUI.Field`](#dustguifield)
+- [`DustGUI.Media`](#dustguimedia)
+- [`DustGUI.Slider`](#dustguislider)
+- [`DustGUI.Toolbar`](#dustguitoolbar)
 
 ## DustGUI.ExtraSlider & DustGUI.ExtraIntSlider
 
@@ -66,6 +77,306 @@ public class DemoScriptGUI : Editor
 ```
 
 PS: Linking of editor `LinkEditor(this)` is optional, but if you link editor then values will be updated more friendly when you'll change them by dragging starting with click on the title of the object.
+
+## DustGUI.Basic
+
+```C#
+// Header
+DustGUI.Header(string title);
+DustGUI.Header(string title, float width);
+DustGUI.Header(string title, float width, float height);
+
+// Label
+DustGUI.Label(string title);
+DustGUI.Label(string title, Color color);
+DustGUI.Label(string title, GUIStyle style);
+DustGUI.Label(string title, float width);
+DustGUI.Label(string title, float width, float height);
+DustGUI.Label(string title, float width, float height, Color color);
+DustGUI.Label(string title, float width, float height, GUIStyle style);
+
+// SimpleLabel
+DustGUI.SimpleLabel(string title);
+DustGUI.SimpleLabel(string title, Color color);
+DustGUI.SimpleLabel(string title, GUIStyle style);
+DustGUI.SimpleLabel(string title, float width);
+DustGUI.SimpleLabel(string title, float width, float height);
+DustGUI.SimpleLabel(string title, float width, float height, Color color);
+DustGUI.SimpleLabel(string title, float width, float height, GUIStyle style);
+
+DustGUI.StaticTextField(string label, string message);
+
+// HelpBoxesDustGUI.HelpBoxInfo(string message);
+DustGUI.HelpBoxWarning(string message);
+DustGUI.HelpBoxError(string message);
+
+// Space
+DustGUI.Space();
+DustGUI.Space(float width);
+
+DustGUI.SpaceLine();
+DustGUI.SpaceLine(float width);
+
+DustGUI.SpaceExpand();
+DustGUI.SpaceExpand(float width);
+
+// Lock/Unlock
+DustGUI.Lock();
+DustGUI.Unlock();
+
+// Indent Level controls
+(int) DustGUI.indentLevel
+(void) DustGUI.IndentLevelInc();
+(void) DusGUI.IndentLevelDec();
+(int) DustGUI.IndentLevelReset();
+(int) DustGUI.IndentLevelReset(int newValue);
+
+// Helpers
+(void) DustGUI.ForcedRedrawSceneView();
+(bool) DustGUI.IsUndoRedoPerformed();
+```
+
+## DustGUI.Block
+
+### Horizontal Block
+
+```C#
+(Rect) DustGUI.BeginHorizontal();
+(Rect) DustGUI.BeginHorizontal(float width);
+(Rect) DustGUI.BeginHorizontal(float width, float height);
+
+(Rect) DustGUI.BeginHorizontal(GUIStyle style);
+(Rect) DustGUI.BeginHorizontal(GUIStyle style, float width);
+(Rect) DustGUI.BeginHorizontal(GUIStyle style, float width, float height);
+
+(Rect) DustGUI.BeginHorizontalBox();
+(Rect) DustGUI.BeginHorizontalBox(float width);
+(Rect) DustGUI.BeginHorizontalBox(float width, float height);
+
+(void) DustGUI.EndHorizontal();
+```
+
+### Vertical Block
+
+```C#
+(Rect) DustGUI.BeginVertical();
+(Rect) DustGUI.BeginVertical(float width);
+(Rect) DustGUI.BeginVertical(float width, float height);
+
+(Rect) DustGUI.BeginVertical(GUIStyle style);
+(Rect) DustGUI.BeginVertical(GUIStyle style, float width);
+(Rect) DustGUI.BeginVertical(GUIStyle style, float width, float height);
+
+(Rect) DustGUI.BeginVerticalBox();
+(Rect) DustGUI.BeginVerticalBox(float width);
+(Rect) DustGUI.BeginVerticalBox(float width, float height);
+
+(void) DustGUI.EndVertical();
+```
+
+### Foldout Block
+
+```C#
+// foldoutId - foldout open/close state bound to this key
+// targetId  - foldout open/close state bound to this object
+
+(bool) DustGUI.FoldoutBegin(string title, string foldoutId);
+(bool) DustGUI.FoldoutBegin(string title, string foldoutId, bool defaultState);
+(bool) DustGUI.FoldoutBegin(string title, string foldoutId, Object targetId)
+(bool) DustGUI.FoldoutBegin(string title, string foldoutId, Object targetId, bool defaultState)
+
+// Foldout always open 
+(void) DustGUI.FoldoutBegin(string title);
+
+(void) DustGUI.FoldoutEnd()
+```
+
+### ScrollView
+
+```C#
+(Vector2) DustGUI.BeginScrollView(Vector2 scrollPosition);
+(Vector2) DustGUI.BeginScrollView(Vector2 scrollPosition, float width)
+(Vector2) DustGUI.BeginScrollView(Vector2 scrollPosition, float width, float height);
+
+(Vector2) DustGUI.BeginScrollView(Vector2 scrollPosition, GUIStyle style);
+(Vector2) DustGUI.BeginScrollView(Vector2 scrollPosition, GUIStyle style, float width);
+(Vector2) DustGUI.BeginScrollView(Vector2 scrollPosition, GUIStyle style, float width, float height);
+
+// Return true if scroll position did change
+(bool) DustGUI.BeginScrollView(ref Vector2 scrollPosition);
+(bool) DustGUI.BeginScrollView(ref Vector2 scrollPosition, float width);
+(bool) DustGUI.BeginScrollView(ref Vector2 scrollPosition, float width, float height);
+
+(bool) DustGUI.BeginScrollView(ref Vector2 scrollPosition, GUIStyle style);
+(bool) DustGUI.BeginScrollView(ref Vector2 scrollPosition, GUIStyle style, float width);
+(bool) DustGUI.BeginScrollView(ref Vector2 scrollPosition, GUIStyle style, float width, float height);
+
+(void) DustGUI.EndScrollView();
+```
+
+## DustGUI.Button
+
+```C#
+enum ButtonState
+{
+    Normal,
+    Pressed,
+    Locked
+}
+
+(bool) DustGUI.Button(string label);
+(bool) DustGUI.Button(string label, ButtonState state);
+(bool) DustGUI.Button(string label, float width, float height);
+(bool) DustGUI.Button(string label, float width, float height, ButtonState state);
+
+(bool) DustGUI.IconButton(string iconName);
+(bool) DustGUI.IconButton(string iconName, ButtonState state);
+(bool) DustGUI.IconButton(string iconName, GUIStyle style);
+(bool) DustGUI.IconButton(string iconName, float width, float height);
+(bool) DustGUI.IconButton(string iconName, float width, float height, ButtonState state);
+(bool) DustGUI.IconButton(string iconName, float width, float height, GUIStyle style);
+(bool) DustGUI.IconButton(string iconName, float width, float height, GUIStyle style, ButtonState state);
+
+(bool) DustGUI.IconButton(Texture texture);
+(bool) DustGUI.IconButton(Texture texture, ButtonState state);
+(bool) DustGUI.IconButton(Texture texture, GUIStyle style);
+(bool) DustGUI.IconButton(Texture texture, float width, float height);
+(bool) DustGUI.IconButton(Texture texture, float width, float height, ButtonState state);
+(bool) DustGUI.IconButton(Texture texture, float width, float height, GUIStyle style);
+(bool) DustGUI.IconButton(Texture texture, float width, float height, GUIStyle style, ButtonState state);
+
+(bool) DustGUI.IconButton(GUIContent content);
+(bool) DustGUI.IconButton(GUIContent content, ButtonState state);
+(bool) DustGUI.IconButton(GUIContent content, GUIStyle style);
+(bool) DustGUI.IconButton(GUIContent content, float width, float height);
+(bool) DustGUI.IconButton(GUIContent content, float width, float height, ButtonState state);
+(bool) DustGUI.IconButton(GUIContent content, float width, float height, GUIStyle style);
+(bool) DustGUI.IconButton(GUIContent content, float width, float height, GUIStyle style, ButtonState state);
+```
+
+## DustGUI.DropDownList
+
+```C#
+(int) DustGUI.DropDownList(int selectedIndex, string[] displayedOptions);
+(int) DustGUI.DropDownList(int selectedIndex, string[] displayedOptions, GUIStyle style);
+(int) DustGUI.DropDownList(int selectedIndex, string[] displayedOptions, float width, float height);
+(int) DustGUI.DropDownList(int selectedIndex, string[] displayedOptions, float width, float height, GUIStyle style);
+
+(int) DustGUI.DropDownList(string label, int selectedIndex, string[] displayedOptions);
+(int) DustGUI.DropDownList(string label, int selectedIndex, string[] displayedOptions, GUIStyle style);
+(int) DustGUI.DropDownList(string label, int selectedIndex, string[] displayedOptions, float width, float height);
+(int) DustGUI.DropDownList(string label, int selectedIndex, string[] displayedOptions, float width, float height, GUIStyle style);
+
+(Enum) DustGUI.DropDownList(Enum selected);
+(Enum) DustGUI.DropDownList(Enum selected, GUIStyle style);
+(Enum) DustGUI.DropDownList(Enum selected, float width, float height);
+(Enum) DustGUI.DropDownList(Enum selected, float width, float height, GUIStyle style);
+```
+
+## DustGUI.Field
+
+```C#
+// Bool
+(bool) DustGUI.Field(string label, bool value);
+(bool) DustGUI.Field(string label, bool value, float width, float height);
+(bool) DustGUI.Field(string label, bool value, float width, float height, GUIStyle style);
+
+// Int
+(int) DustGUI.Field(string label, int value);
+(int) DustGUI.Field(string label, int value, float width, float height);
+(int) DustGUI.Field(string label, int value, float width, float height, GUIStyle style);
+
+// Float
+(float) DustGUI.Field(string label, float value);
+(float) DustGUI.Field(string label, float value, float width, float height);
+(float) DustGUI.Field(string label, float value, float width, float height, GUIStyle style);
+
+// String
+(string) DustGUI.Field(string label, string value);
+(string) DustGUI.Field(string label, string value, float width, float height);
+(string) DustGUI.Field(string label, string value, float width, float height, GUIStyle style);
+
+// Vector3
+(Vector3) DustGUI.Field(string label, Vector3 value);
+(Vector3) DustGUI.Field(string label, Vector3 value, float width, float height);
+
+// Color
+(Color) DustGUI.Field(string label, Color value);
+(Color) DustGUI.Field(string label, Color value, float width, float height);
+
+// AnimationCurve
+(AnimationCurve) DustGUI.Field(string label, AnimationCurve value);
+(AnimationCurve) DustGUI.Field(string label, AnimationCurve value, float width, float height);
+(AnimationCurve) DustGUI.Field(string label, AnimationCurve value, float width, float height, Color color);
+(AnimationCurve) DustGUI.Field(string label, AnimationCurve value, float width, float height, Color color, Rect ranges);
+
+// SerializedProperty
+(void) DustGUI.Field(string label, SerializedProperty property);
+(void) DustGUI.Field(string label, SerializedProperty property, float width, float height);
+(void) DustGUI.Field(GUIContent label, SerializedProperty property);
+(void) DustGUI.Field(GUIContent label, SerializedProperty property, float width, float height);
+```
+
+## DustGUI.Media
+
+```C#
+(void) DustGUI.Image(Rect rect, Texture texture);
+```
+
+## DustGUI.Slider
+
+```C#
+// float value
+
+(float) DustGUI.Slider(float value, float min, float max)
+(float) DustGUI.Slider(float value, float min, float max, float width, float height)
+
+(float) DustGUI.Slider(string label, float value, float min, float max)
+(float) DustGUI.Slider(string label, float value, float min, float max, float width, float height)
+
+(float) DustGUI.Slider(GUIContent label, float value, float min, float max)
+(float) DustGUI.Slider(GUIContent label, float value, float min, float max, float width, float height)
+
+// SerializedProperty
+
+(bool) DustGUI.Slider(SerializedProperty value, float min, float max)
+(bool) DustGUI.Slider(SerializedProperty value, float min, float max, float width, float height)
+
+(bool) DustGUI.Slider(string label, SerializedProperty value, float min, float max)
+(bool) DustGUI.Slider(string label, SerializedProperty value, float min, float max, float width, float height)
+
+(bool) DustGUI.Slider(GUIContent label, SerializedProperty value, float min, float max)
+(bool) DustGUI.Slider(GUIContent label, SerializedProperty value, float min, float max, float width, float height)
+
+//------------------------------------------------------------------------
+
+// Slider in range [0..1] Return float
+(float) DustGUI.SliderOnly01(float value)
+(float) DustGUI.SliderOnly01(float value, float width, float height)
+
+// Slider without title
+(float) DustGUI.SliderOnly(float value, float min, float max)
+(float) DustGUI.SliderOnly(float value, float min, float max, float width, float height)
+```
+
+## DustGUI.Toolbar
+
+```C#
+// Basic toolbar
+
+(int) DustGUI.Toolbar(int selectedTab, string[] titles);
+(int) DustGUI.Toolbar(int selectedTab, string[] titles, GUIStyle style, GUI.ToolbarButtonSize buttonSize, params GUILayoutOption[] options);
+
+// Toolbar save active tab in EditorSession data
+// - toolbarId - active tab index bound to this key
+// - targetId  - active tab index bound to this object
+
+(int) DustGUI.Toolbar(string toolbarId, string[] titles);
+(int) DustGUI.Toolbar(string toolbarId, Object targetId, string[] titles);
+
+(int) DustGUI.Toolbar(string toolbarId, string[] titles, GUIStyle style, GUI.ToolbarButtonSize buttonSize, params GUILayoutOption[] options);
+(int) DustGUI.Toolbar(string toolbarId, Object targetId, string[] titles, GUIStyle style, GUI.ToolbarButtonSize buttonSize, params GUILayoutOption[] options);
+```
 
 ## Bug Reporting and Feature Requests
 
