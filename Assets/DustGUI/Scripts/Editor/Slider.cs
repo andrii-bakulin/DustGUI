@@ -34,31 +34,35 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static void Slider(SerializedProperty value, float min, float max)
+        public static bool Slider(SerializedProperty value, float min, float max)
             => Slider((GUIContent) null, value, min, max, 0f, 0f);
 
-        public static void Slider(SerializedProperty value, float min, float max, float width, float height)
+        public static bool Slider(SerializedProperty value, float min, float max, float width, float height)
             => Slider((GUIContent) null, value, min, max, width, height);
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static void Slider(string label, SerializedProperty value, float min, float max)
+        public static bool Slider(string label, SerializedProperty value, float min, float max)
             => Slider(new GUIContent(label), value, min, max, 0f, 0f);
 
-        public static void Slider(string label, SerializedProperty value, float min, float max, float width, float height)
+        public static bool Slider(string label, SerializedProperty value, float min, float max, float width, float height)
             => Slider(new GUIContent(label), value, min, max, width, height);
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static void Slider(GUIContent label, SerializedProperty value, float min, float max)
+        public static bool Slider(GUIContent label, SerializedProperty value, float min, float max)
             => Slider(label, value, min, max, 0f, 0f);
 
-        public static void Slider(GUIContent label, SerializedProperty value, float min, float max, float width, float height)
+        public static bool Slider(GUIContent label, SerializedProperty value, float min, float max, float width, float height)
         {
-            if( label == null)
-                EditorGUILayout.Slider(value, min, max, NewLayoutOptions(width, height).Build());
+            var oldValue = value.floatValue;
 
-            EditorGUILayout.Slider(value, min, max, label, NewLayoutOptions(width, height).Build());
+            if (label == null)
+                EditorGUILayout.Slider(value, min, max, NewLayoutOptions(width, height).Build());
+            else
+                EditorGUILayout.Slider(value, min, max, label, NewLayoutOptions(width, height).Build());
+
+            return !value.floatValue.Equals(oldValue);
         }
 
         //--------------------------------------------------------------------------------------------------------------
