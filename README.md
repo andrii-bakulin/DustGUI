@@ -15,6 +15,11 @@ DustGUI provides a few new components:
 - [`DustGUI.ExtraSlider`](#dustguiextraslider--dustguiextraintslider) - extended float-slider supporting out-of-slider-range values
 - [`DustGUI.ExtraIntSlider`](#dustguiextraslider--dustguiextraintslider) - extended int-slider supporting out-of-slider-range values
 
+Builders
+
+- [`GUIStyle Builder`](#guistyle-builder)
+- [`GUILayoutOption Builder`](#guilayoutoption-builder)
+
 Shortcuts for standard elements:
 
 - [`DustGUI.Basic`](#dustguibasic)
@@ -77,6 +82,94 @@ public class DemoScriptGUI : Editor
 ```
 
 PS: Linking of editor `LinkEditor(this)` is optional, but if you link editor then values will be updated more friendly when you'll change them by dragging starting with click on the title of the object.
+
+
+## GUIStyle Builder
+
+```C#
+// How to create [BUILDER]
+(DustGUI.Style) DustGUI.NewStyle();
+(DustGUI.Style) DustGUI.NewStyle(GUIStyle other);
+
+// Additional Shortcuts
+(DustGUI.Style) DustGUI.NewStyleLabel(); 
+(DustGUI.Style) DustGUI.NewStyleButton(); 
+(DustGUI.Style) DustGUI.NewStylePopup(); 
+
+// [BUILDER] methods
+
+// Padding
+[BUILDER].Padding(int global)
+[BUILDER].Padding(int horizontal, int vertical)
+[BUILDER].Padding(int top, int horizontal, int bottom)
+[BUILDER].Padding(int left, int right, int top, int bottom)
+
+[BUILDER].PaddingLeft(int value)
+[BUILDER].PaddingRight(int value)
+[BUILDER].PaddingTop(int value)
+[BUILDER].PaddingBottom(int value)
+
+// Margin
+[BUILDER].Margin(int global)
+[BUILDER].Margin(int horizontal, int vertical)
+[BUILDER].Margin(int top, int horizontal, int bottom)
+[BUILDER].Margin(int left, int right, int top, int bottom)
+
+[BUILDER].MarginLeft(int value)
+[BUILDER].MarginRight(int value)
+[BUILDER].MarginTop(int value)
+[BUILDER].MarginBottom(int value)
+
+// Alignment
+[BUILDER].Alignment(TextAnchor value)
+
+[BUILDER].AlignUpperLeft()
+[BUILDER].AlignUpperCenter()
+[BUILDER].AlignUpperRight()
+
+[BUILDER].AlignMiddleLeft()
+[BUILDER].AlignMiddleCenter()
+[BUILDER].AlignMiddleRight()
+
+[BUILDER].AlignLowerLeft()
+[BUILDER].AlignLowerCenter()
+[BUILDER].AlignLowerRight()
+
+// Build GUIStyle
+(GUIStyle) [BUILDER].Build();
+
+// Samples
+GUIStyle style0 = DustGUI.NewStyle().ExpandWidth().Build();
+GUIStyle style1 = DustGUI.NewStyleLabel().AlignMiddleCenter().Build();
+GUIStyle style2 = DustGUI.NewStyleButton().Padding(5, 10).Margin(0).Build();
+```
+
+## GUILayoutOption Builder
+
+```C#
+// How to create [BUILDER]
+(DustGUI.LayoutOptions) DustGUI.NewLayoutOptions();
+(DustGUI.LayoutOptions) DustGUI.NewLayoutOptions(float width, float height);
+
+// [BUILDER] methods
+[BUILDER].Width(float value)      // will be apply only if it greater then 0f
+[BUILDER].MinWidth(float value)
+[BUILDER].MaxWidth(float value)
+[BUILDER].ExpandWidth(bool value)
+
+[BUILDER].Height(float value)     // will be apply only if it greater then 0f
+[BUILDER].MinHeight(float value)
+[BUILDER].MaxHeight(float value)
+[BUILDER].ExpandHeight(bool value)
+
+[BUILDER].WidthAndHeight(float width, float height)
+
+(GUILayoutOption[]) [BUILDER].Build();
+
+// Samples
+GUILayoutOption[] options0 = DustGUI.NewLayoutOptions(300, 50).ExpandWidth().Build();
+GUILayoutOption[] options1 = DustGUI.NewLayoutOptions().Width(100).MaxWidth(300).Build();
+```
 
 ## DustGUI.Basic
 
