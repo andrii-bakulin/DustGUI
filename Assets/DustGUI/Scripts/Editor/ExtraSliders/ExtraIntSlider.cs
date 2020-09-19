@@ -189,6 +189,8 @@ namespace DustEngine
                     {
                         value = sliderNewValue;
                         isChanged = true;
+
+                        BlurFocusControl();
                     }
 
                     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

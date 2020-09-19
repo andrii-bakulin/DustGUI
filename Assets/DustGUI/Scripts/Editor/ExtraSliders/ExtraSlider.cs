@@ -189,6 +189,8 @@ namespace DustEngine
                     {
                         value = (float) System.Math.Round(sliderNewValue, 2);
                         isChanged = true;
+
+                        BlurFocusControl();
                     }
 
                     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
