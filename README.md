@@ -323,6 +323,7 @@ enum ButtonState
 (bool) DustGUI.Button(string label, ButtonState state);
 (bool) DustGUI.Button(string label, float width, float height);
 (bool) DustGUI.Button(string label, float width, float height, ButtonState state);
+(bool) DustGUI.Button(string label, float width, float height, GUIStyle style, ButtonState state);
 
 (bool) DustGUI.IconButton(string iconName);
 (bool) DustGUI.IconButton(string iconName, ButtonState state);

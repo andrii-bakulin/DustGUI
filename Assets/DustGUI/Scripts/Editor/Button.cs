@@ -62,10 +62,13 @@ namespace DustEngine
             => Button(label, width, height, ButtonState.Normal);
 
         public static bool Button(string label, float width, float height, ButtonState state)
+            => Button(label, width, height, null, state);
+
+        public static bool Button(string label, float width, float height, GUIStyle style, ButtonState state)
         {
             ApplyButtonState(state);
 
-            bool res = GUILayout.Button(label, NewLayoutOptions(width, height).Build());
+            bool res = GUILayout.Button(label, style, NewLayoutOptions(width, height).Build());
 
             RollbackButtonState();
 
