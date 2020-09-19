@@ -49,6 +49,9 @@ namespace DustEngine
                 return this;
             }
 
+            public LayoutOptions ExpandWidth()
+                => ExpandWidth(true);
+
             public LayoutOptions ExpandWidth(bool value)
             {
                 m_Options.Add(GUILayout.ExpandWidth(value));
@@ -76,6 +79,9 @@ namespace DustEngine
                 m_Options.Add(GUILayout.MaxHeight(value));
                 return this;
             }
+
+            public LayoutOptions ExpandHeight()
+                => ExpandHeight(true);
 
             public LayoutOptions ExpandHeight(bool value)
             {
