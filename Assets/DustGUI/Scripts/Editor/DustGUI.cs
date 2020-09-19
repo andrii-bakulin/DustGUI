@@ -30,14 +30,17 @@ namespace DustEngine
         public static void Label(string title)
             => Label(title, 0, 0);
 
+        public static void Label(string title, Color color)
+            => Label(title, 0, 0, color);
+
+        public static void Label(string title, GUIStyle style)
+            => Label(title, 0, 0, style);
+
         public static void Label(string title, float width)
             => Label(title, width, 0);
 
         public static void Label(string title, float width, float height)
             => Label(title, width, height, labelNormalColor);
-
-        public static void Label(string title, GUIStyle style)
-            => Label(title, 0, 0, style);
 
         public static void Label(string title, float width, float height, Color color)
         {
@@ -56,6 +59,9 @@ namespace DustEngine
 
         public static void SimpleLabel(string title)
             => SimpleLabel(title, 0, 0, labelNormalColor);
+
+        public static void SimpleLabel(string title, Color color)
+            => SimpleLabel(title, 0, 0, color);
 
         public static void SimpleLabel(string title, GUIStyle style)
             => SimpleLabel(title, 0, 0, style);
