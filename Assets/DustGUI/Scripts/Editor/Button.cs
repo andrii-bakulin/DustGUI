@@ -60,6 +60,9 @@ namespace DustEngine
 
         public static bool Button(string label, float width, float height, GUIStyle style, ButtonState state)
         {
+            if (style == null)
+                style = NewStyleButton().Build();
+
             ApplyButtonState(state);
 
             bool res = GUILayout.Button(label, style, NewLayoutOptions(width, height).Build());
