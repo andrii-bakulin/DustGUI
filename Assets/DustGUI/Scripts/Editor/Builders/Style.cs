@@ -103,6 +103,66 @@ namespace DustEngine
             public Style AlignLowerRight()   { m_GUIStyle.alignment = TextAnchor.LowerRight;   return this; }
 
             //----------------------------------------------------------------------------------------------------------
+            // Normal State
+
+            public Style NormalBackground(Texture2D texture)
+            {
+                m_GUIStyle.normal.background = texture;
+                return this;
+            }
+
+            public Style NormalTextColor(Color color)
+            {
+                m_GUIStyle.normal.textColor = color;
+                return this;
+            }
+
+            //----------------------------------------------------------------------------------------------------------
+            // Hover State
+
+            public Style HoverBackground(Texture2D texture)
+            {
+                m_GUIStyle.hover.background = texture;
+                return this;
+            }
+
+            public Style HoverTextColor(Color color)
+            {
+                m_GUIStyle.hover.textColor = color;
+                return this;
+            }
+
+            //----------------------------------------------------------------------------------------------------------
+            // Active State
+
+            public Style ActiveBackground(Texture2D texture)
+            {
+                m_GUIStyle.active.background = texture;
+                return this;
+            }
+
+            public Style ActiveTextColor(Color color)
+            {
+                m_GUIStyle.active.textColor = color;
+                return this;
+            }
+
+            //----------------------------------------------------------------------------------------------------------
+            // Focused State
+
+            public Style FocusedBackground(Texture2D texture)
+            {
+                m_GUIStyle.focused.background = texture;
+                return this;
+            }
+
+            public Style FocusedTextColor(Color color)
+            {
+                m_GUIStyle.focused.textColor = color;
+                return this;
+            }
+
+            //----------------------------------------------------------------------------------------------------------
 
             public GUIStyle Build()
             {
