@@ -93,9 +93,7 @@ namespace DustEngine
 
             public LayoutOptions WidthAndHeight(float width, float height)
             {
-                this.Width(width);
-                this.Height(height);
-                return this;
+                return Width(width).Height(height);
             }
 
             //----------------------------------------------------------------------------------------------------------
