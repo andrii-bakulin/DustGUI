@@ -5,8 +5,6 @@ namespace DustEngine
 {
     public static partial class DustGUI
     {
-        private static GUIStyle iconButtonStyle = null;
-
         public enum ButtonState
         {
             Normal = 0,
@@ -14,16 +12,12 @@ namespace DustEngine
             Locked = 2,
         }
 
+        private static GUIStyle s_IconButtonStyle = null;
+        public static GUIStyle iconButtonStyle => new GUIStyle(s_IconButtonStyle);
+
         static DustGUI()
         {
-            int pad = Config.ICON_BUTTON_PADDING;
-            iconButtonStyle = new GUIStyle (GUI.skin.button);
-            iconButtonStyle.padding = new RectOffset(pad, pad, pad, pad);
-        }
-
-        public static GUIStyle GetIconButtonStyle()
-        {
-            return new GUIStyle(iconButtonStyle);
+            s_IconButtonStyle = NewStyleButton().Padding(Config.ICON_BUTTON_PADDING).Build();
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -144,15 +138,11 @@ namespace DustEngine
         public static bool IconButton(GUIContent content, float width, float height, GUIStyle style, ButtonState state)
         {
             if (style == null)
-                style = iconButtonStyle;
+                style = s_IconButtonStyle;
 
             ApplyButtonState(state);
 
-            bool res = GUILayout.Button(content, style, new GUILayoutOption[]
-            {
-                GUILayout.Width(width),
-                GUILayout.Height(height)
-            });
+            bool res = GUILayout.Button(content, style, NewLayoutOptions(width, height).Build());
 
             RollbackButtonState();
 

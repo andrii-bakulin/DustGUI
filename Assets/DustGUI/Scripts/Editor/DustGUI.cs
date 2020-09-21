@@ -44,10 +44,7 @@ namespace DustEngine
 
         public static void Label(string title, float width, float height, Color color)
         {
-            var style = new GUIStyle(GUI.skin.label);
-            style.normal.textColor = color;
-
-            Label(title, width, height, style);
+            Label(title, width, height, NewStyleLabel().NormalTextColor(color).Build());
         }
 
         public static void Label(string title, float width, float height, GUIStyle style)
@@ -74,10 +71,7 @@ namespace DustEngine
 
         public static void SimpleLabel(string title, float width, float height, Color color)
         {
-            var style = new GUIStyle(GUI.skin.label);
-            style.normal.textColor = color;
-
-            SimpleLabel(title, width, height, style);
+            SimpleLabel(title, width, height, NewStyleLabel().NormalTextColor(color).Build());
         }
 
         public static void SimpleLabel(string title, float width, float height, GUIStyle style)
