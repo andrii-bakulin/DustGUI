@@ -168,7 +168,7 @@ PS: Linking of editor `LinkEditor(this)` is optional, but if you link editor the
 (GUIStyle) [BUILDER].Build();
 
 // Samples
-GUIStyle style0 = DustGUI.NewStyle().ExpandWidth().Build();
+GUIStyle style0 = DustGUI.NewStyle().TextColor(Color.gray).FontSizeScale(0.75f).Build();
 GUIStyle style1 = DustGUI.NewStyleLabel().AlignMiddleCenter().Build();
 GUIStyle style2 = DustGUI.NewStyleButton().Padding(5, 10).Margin(0).Build();
 ```
