@@ -82,6 +82,20 @@ namespace DustEngine
             public Style MarginBottom(int value) { m_GUIStyle.margin.bottom = value; return this; }
 
             //----------------------------------------------------------------------------------------------------------
+
+            public Style FontSize(int value)
+            {
+                m_GUIStyle.fontSize = value;
+                return this;
+            }
+
+            public Style FontSizeScaled(float scale)
+            {
+                m_GUIStyle.fontSize = Mathf.RoundToInt(GUI.skin.label.fontSize * scale);
+                return this;
+            }
+
+            //----------------------------------------------------------------------------------------------------------
             // Alignment
 
             public Style Alignment(TextAnchor value)
