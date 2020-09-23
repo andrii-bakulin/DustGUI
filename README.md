@@ -96,6 +96,7 @@ PS: Linking of editor `LinkEditor(this)` is optional, but if you link editor the
 (DustGUI.Style) DustGUI.NewStyleButton(); 
 (DustGUI.Style) DustGUI.NewStylePopup(); 
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // [BUILDER] methods
 
 // Padding
@@ -120,9 +121,13 @@ PS: Linking of editor `LinkEditor(this)` is optional, but if you link editor the
 [BUILDER].MarginTop(int value)
 [BUILDER].MarginBottom(int value)
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 // FontSize
 [BUILDER].FontSize(int value)
 [BUILDER].FontSizeScaled(float scale)
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // Alignment
 [BUILDER].Alignment(TextAnchor value)
@@ -260,6 +265,8 @@ DustGUI.Unlock();
 (void) DustGUI.BlurFocusControl();
 
 (void) DustGUI.ForcedRedrawSceneView();
+(void) DustGUIRuntime.ForcedRedrawSceneView(); // this method may call outside Editor folder
+
 (bool) DustGUI.IsUndoRedoPerformed();
 ```
 
