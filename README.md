@@ -139,6 +139,26 @@ PS: Linking of editor `LinkEditor(this)` is optional, but if you link editor the
 [BUILDER].AlignLowerCenter()
 [BUILDER].AlignLowerRight()
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// Change TextColor & Background
+[BUILDER].Background(Texture2D texture)     // warning! this method set value for all 4 states
+[BUILDER].TextColor(Color color)            // warning! this method set value for all 4 states
+
+[BUILDER].NormalBackground(Texture2D texture)
+[BUILDER].NormalTextColor(Color color)
+
+[BUILDER].HoverBackground(Texture2D texture)
+[BUILDER].HoverTextColor(Color color)
+
+[BUILDER].ActiveBackground(Texture2D texture)
+[BUILDER].ActiveTextColor(Color color)
+
+[BUILDER].FocusedBackground(Texture2D texture)
+[BUILDER].FocusedTextColor(Color color)
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 // Build GUIStyle
 (GUIStyle) [BUILDER].Build();
 

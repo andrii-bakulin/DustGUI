@@ -117,6 +117,19 @@ namespace DustEngine
             public Style AlignLowerRight()   { m_GUIStyle.alignment = TextAnchor.LowerRight;   return this; }
 
             //----------------------------------------------------------------------------------------------------------
+            // Rewrite all States
+
+            public Style Background(Texture2D texture)
+            {
+                return NormalBackground(texture).HoverBackground(texture).ActiveBackground(texture).FocusedBackground(texture);
+            }
+
+            public Style TextColor(Color color)
+            {
+                return NormalTextColor(color).HoverTextColor(color).ActiveTextColor(color).FocusedTextColor(color);
+            }
+
+            //----------------------------------------------------------------------------------------------------------
             // Normal State
 
             public Style NormalBackground(Texture2D texture)
