@@ -197,6 +197,14 @@ DustGUI.SimpleLabel(string title, float width, float height);
 DustGUI.SimpleLabel(string title, float width, float height, Color color);
 DustGUI.SimpleLabel(string title, float width, float height, GUIStyle style);
 
+DustGUI.SimpleLabel(GUIContent title);
+DustGUI.SimpleLabel(GUIContent title, Color color);
+DustGUI.SimpleLabel(GUIContent title, GUIStyle style);
+DustGUI.SimpleLabel(GUIContent title, float width);
+DustGUI.SimpleLabel(GUIContent title, float width, float height);
+DustGUI.SimpleLabel(GUIContent title, float width, float height, Color color);
+DustGUI.SimpleLabel(GUIContent title, float width, float height, GUIStyle style);
+
 DustGUI.StaticTextField(string label, string message);
 
 // HelpBoxesDustGUI.HelpBoxInfo(string message);

@@ -70,11 +70,34 @@ namespace DustEngine
             => SimpleLabel(title, width, height, labelNormalColor);
 
         public static void SimpleLabel(string title, float width, float height, Color color)
-        {
-            SimpleLabel(title, width, height, NewStyleLabel().NormalTextColor(color).Build());
-        }
+            => SimpleLabel(title, width, height, NewStyleLabel().NormalTextColor(color).Build());
 
         public static void SimpleLabel(string title, float width, float height, GUIStyle style)
+        {
+            GUILayout.Label(title, style, NewLayoutOptions(width, height).Build());
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static void SimpleLabel(GUIContent title)
+            => SimpleLabel(title, 0, 0, labelNormalColor);
+
+        public static void SimpleLabel(GUIContent title, Color color)
+            => SimpleLabel(title, 0, 0, color);
+
+        public static void SimpleLabel(GUIContent title, GUIStyle style)
+            => SimpleLabel(title, 0, 0, style);
+
+        public static void SimpleLabel(GUIContent title, float width)
+            => SimpleLabel(title, width, 0, labelNormalColor);
+
+        public static void SimpleLabel(GUIContent title, float width, float height)
+            => SimpleLabel(title, width, height, labelNormalColor);
+
+        public static void SimpleLabel(GUIContent title, float width, float height, Color color)
+            => SimpleLabel(title, width, height, NewStyleLabel().NormalTextColor(color).Build());
+
+        public static void SimpleLabel(GUIContent title, float width, float height, GUIStyle style)
         {
             GUILayout.Label(title, style, NewLayoutOptions(width, height).Build());
         }
