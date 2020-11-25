@@ -84,6 +84,17 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Color
+
+        public static Gradient Field(string label, Gradient value)
+            => Field(label, value, 0, 0);
+
+        public static Gradient Field(string label, Gradient value, float width, float height)
+        {
+            return EditorGUILayout.GradientField(label, value, NewLayoutOptions(width, height).Build());
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
         // AnimationCurve
 
         public static AnimationCurve Field(string label, AnimationCurve value)
