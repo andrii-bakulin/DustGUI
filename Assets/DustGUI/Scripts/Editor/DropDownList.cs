@@ -52,5 +52,21 @@ namespace DustEngine
         {
             return EditorGUILayout.EnumPopup(selected, style, NewLayoutOptions(width, height).Build());
         }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static Enum DropDownList(string label, Enum selected)
+            => DropDownList(label, selected, 0, 0, EditorStyles.popup);
+
+        public static Enum DropDownList(string label, Enum selected, GUIStyle style)
+            => DropDownList(label, selected, 0, 0, style);
+
+        public static Enum DropDownList(string label, Enum selected, float width, float height)
+            => DropDownList(label, selected, width, height, EditorStyles.popup);
+
+        public static Enum DropDownList(string label, Enum selected, float width, float height, GUIStyle style)
+        {
+            return EditorGUILayout.EnumPopup(label, selected, style, NewLayoutOptions(width, height).Build());
+        }
     }
 }
