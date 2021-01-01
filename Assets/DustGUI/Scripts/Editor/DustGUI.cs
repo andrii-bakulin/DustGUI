@@ -219,12 +219,16 @@ namespace DustEngine
             SceneView.lastActiveSceneView.Repaint();
         }
 
+        public static void ForcedRedrawInspector(Editor editor)
+        {
+            editor.Repaint();
+        }
+
         public static bool IsUndoRedoPerformed()
         {
             return Event.current.type == EventType.ValidateCommand && Event.current.commandName == "UndoRedoPerformed";
         }
 
         //--------------------------------------------------------------------------------------------------------------
-
     }
 }
