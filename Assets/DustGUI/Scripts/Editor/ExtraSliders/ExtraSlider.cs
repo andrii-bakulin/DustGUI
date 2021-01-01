@@ -138,19 +138,31 @@ namespace DustEngine
 
             public bool Draw(SerializedProperty propertyValue)
             {
-                propertyValue.floatValue = Draw(null, propertyValue.floatValue, propertyValue);
+                float newValue = Draw(null, propertyValue.floatValue, propertyValue);
+
+                if (isChanged)
+                    propertyValue.floatValue = newValue;
+
                 return isChanged;
             }
 
             public bool Draw(string label, SerializedProperty propertyValue)
             {
-                propertyValue.floatValue = Draw(new GUIContent(label), propertyValue.floatValue, propertyValue);
+                float newValue = Draw(new GUIContent(label), propertyValue.floatValue, propertyValue);
+
+                if (isChanged)
+                    propertyValue.floatValue = newValue;
+
                 return isChanged;
             }
 
             public bool Draw(GUIContent label, SerializedProperty propertyValue)
             {
-                propertyValue.floatValue = Draw(label, propertyValue.floatValue, propertyValue);
+                float newValue = Draw(label, propertyValue.floatValue, propertyValue);
+
+                if (isChanged)
+                    propertyValue.floatValue = newValue;
+
                 return isChanged;
             }
 
