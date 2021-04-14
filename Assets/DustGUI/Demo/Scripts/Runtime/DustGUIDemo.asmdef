@@ -1,0 +1,15 @@
+{
+    "name": "DustGUIDemo",
+    "references": [
+        "GUID:2c399bd62ee374dfa9f13ec0240e60e2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

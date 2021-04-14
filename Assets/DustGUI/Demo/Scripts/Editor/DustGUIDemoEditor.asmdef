@@ -1,0 +1,18 @@
+{
+    "name": "DustGUIRuntime",
+    "references": [
+        "GUID:2c399bd62ee374dfa9f13ec0240e60e2",
+        "GUID:129507c79ba7e448e9fc6a3ab2ab0545"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
