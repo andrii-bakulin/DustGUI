@@ -2,7 +2,7 @@
 
 DustGUI is library for simplify usage of Unity GUI elements from `GUI`, `GUILayout` and `EditorGUILayout` classes.
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/80ec7878cd8d4a6c91244470fe5a1435)](https://www.codacy.com/manual/andrii-bakulin/DustGUI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andrii-bakulin/DustGUI&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/80ec7878cd8d4a6c91244470fe5a1435)](https://app.codacy.com/gh/andrii-bakulin/DustGUI/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 ![Unity 2020.2 - success tested](https://img.shields.io/static/v1?label=Unity%202020.2&message=tested&color=success)
 ![Unity 2020.1 - success tested](https://img.shields.io/static/v1?label=Unity%202020.1&message=tested&color=success)
