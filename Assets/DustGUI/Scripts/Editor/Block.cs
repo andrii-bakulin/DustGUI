@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace DustEngine
+namespace Dust
 {
     public static partial class DustGUI
     {
@@ -101,7 +101,7 @@ namespace DustEngine
         public static bool FoldoutBegin(string title, string foldoutId, Object targetId, bool defaultState)
         {
 #if UNITY_2019_1_OR_NEWER
-            string key = "DustEngine.DustGUI.Foldout." + foldoutId;
+            string key = "Dust.DustGUI.Foldout." + foldoutId;
 
             if (targetId != null)
                 key += "." + targetId.GetInstanceID();

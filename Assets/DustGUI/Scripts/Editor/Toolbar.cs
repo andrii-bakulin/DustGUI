@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace DustEngine
+namespace Dust
 {
     public static partial class DustGUI
     {
@@ -28,7 +28,7 @@ namespace DustEngine
 
         public static int Toolbar(string toolbarId, Object targetId, string[] titles, GUIStyle style, GUI.ToolbarButtonSize buttonSize, params GUILayoutOption[] options)
         {
-            string key = "DustEngine.DustGUI.Toolbar." + toolbarId;
+            string key = "Dust.DustGUI.Toolbar." + toolbarId;
 
             if (targetId != null)
                 key += "." + targetId.GetInstanceID();
